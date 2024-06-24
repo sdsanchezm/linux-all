@@ -1,7 +1,15 @@
 # Networking configuration in Raspberry Pi Model 3B
 
+## Install tools
 
-## Scan and setup
+- `sudo apt install wireless-tools wpasupplicant`
+
+## Scan
+
+- `sudo ip link set wlan0 up`
+- `sudo iwlist wlan0 scan`
+
+## Connect
 - scan
 	- sudo iwlist wlan0 scan
 
@@ -38,5 +46,20 @@
 - if required:
 	- `sudo rm /var/run/wpa_supplicant/wlan0`
 - Note: for most model 3B, it is required to remove the existing `wlan0`;
+
+## Verify
+
+- `sudo dhclient wlan0`
+- `ip addr show wlan0`
+
+## Misc
+
+- stop wpa_supplicant
+	- `sudo killall wpa_supplicant`
+- release ip
+	- `sudo dhclient -r wlan0`
+- interface down
+	- `sudo ip link set wlan0 down`
+
 
 
