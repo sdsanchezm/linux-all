@@ -237,9 +237,44 @@
         - -c: Continuously displays CPU utilization statistics. Example: iostat -c
         - -k: Displays statistics in kilobytes per second. Example: iostat -k
 
+### ss
+- Must be sudo to display processes
+- Example
+    - check ports opened
+        - `ss -t -a -n` 
+        - `ss -t -a -n -p` 
+            ```
+            State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port   Process                                      
+            LISTEN   0        4096          127.0.0.54:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=19))   
+            LISTEN   0        4096           127.0.0.1:631            0.0.0.0:*       users:(("cupsd",pid=931,fd=7))              
+            LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=17))   
+            LISTEN   0        4096             0.0.0.0:5355           0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=11))   
+            LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
+            LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13)) 
+            ```
+        - `sudo ss -t -a -n -p` - must be sudo in order to show programs names
+            ```
+            State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port   Process                                      
+            LISTEN   0        4096          127.0.0.54:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=19))   
+            LISTEN   0        4096           127.0.0.1:631            0.0.0.0:*       users:(("cupsd",pid=931,fd=7))              
+            LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=17))   
+            LISTEN   0        4096             0.0.0.0:5355           0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=11))   
+            LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
+            LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13))
+            ```
+### free
+- Example (check memory available)
+    - `free -m`
+        ```
+                    total        used        free      shared  buff/cache   available
+        Mem:            3901        1233        1366          51        1597        2667
+        Swap:           3900           2        3898
 
+        ```    
 
-
+### df 
+- file system space usage
+    - `df`
 
 ### ps
 
@@ -281,14 +316,47 @@
     - `systemctl --all status`
     - `systemctl --now enable <service>`
     - `systemctl --failed`
+- Examples:
+    - `sudo systemctl status smb.service`
+    - `sudo systemctl stop smb.service`
+    - `sudo systemctl disable smb.service`
+    - `sudo systemctl enable smb.service`
+    - `sudo systemctl start smb.service`
+    - `sudo systemctl` -- all installed services status
 
 ### adduser
 - Example
     - `adduser`
+    - `sudo adduser jara1` - create the new user
+    - `sudo id jara1` - check the id of the new user
+    - `sudo usermod -a -G adm jara1` - add the group adm to jara1
+    - `id jara1` - verify jara1 id
+    - `userdel jara1` - delete user jara1
+    - `id jara1` - verify jara1 was deleted
+
+### groups
+- Examples
+    - `groups`
+    - `groupadd`
+    - `groupdel`
+    - `groupmems`
+    - `groupmod`
+
+### users
+- Example
+    - `useradd`
+    - `userdbctl`
+    - `userhelper`
+    - `users`
+    - `usermode`
+    - `USER`
+    - `USERS`
 
 ### userdel
 - Example
     - `userdel`
+    - `sudo userdel jara1` - do not rm home dir
+    - `sudo userdel jara1 --remove-home jara1` - removes home dir
 
 ### usermod
 - Example
