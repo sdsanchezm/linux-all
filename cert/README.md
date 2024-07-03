@@ -36,13 +36,15 @@
 
 - Commands, list of options, arguments
 ### cat
-    - cat file.txt
-    - cat -A file.txt - all non-printing characters
-    - cat -n file.txt - - numbers
+- Examples
+    - `cat file.txt`
+    - `cat -A file.txt - all non-printing characters`
+    - `cat -n file.txt - - numbers`
 ### cd
-    - classic, real classic
+- classic, real classic
 
 ### find 
+- Example
     - **`-print`**:
     Outputs the full pathname of the matched files or directories. This is the default action if no other action is specified.
 
@@ -81,6 +83,7 @@
         Searches for `.txt` files only within the same filesystem as `/path/to/search`.
 
 ### grep 
+- Examples
     - **`-i`**:
     Ignores case distinctions in patterns and input data.
 
@@ -120,6 +123,7 @@
 
 
 ### info
+- Examples
     - -a, --all:
     Display all available top-level Info documents.
 
@@ -252,7 +256,7 @@
             LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
             LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13)) 
             ```
-        - `sudo ss -t -a -n -p` - must be sudo in order to show programs names
+        - `sudo ss -t -a -n -p` - must be sudo in order to show programs/processes names
             ```
             State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port   Process                                      
             LISTEN   0        4096          127.0.0.54:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=19))   
@@ -262,6 +266,15 @@
             LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
             LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13))
             ```
+    - -t or --tcp: This option tells ss to display TCP sockets. If you want to see UDP sockets, you would use -u instead.
+
+    - -a or --all: This option shows all sockets, including listening and non-listening (established) sockets.
+
+    - -n or --numeric: This option avoids converting port numbers to service names. It displays the numerical addresses instead of trying to resolve hostnames.
+
+    - -p or --processes: This option shows the process using the socket. It will display the process ID (PID) and the process name.
+
+
 ### free
 - Example (check memory available)
     - `free -m`
@@ -297,6 +310,12 @@
 ### traceroute
 
 
+### xrandr
+
+- Change resolution (tested on rockyL)
+- Example
+    - `xrandr --screen 0 -s 1024x768`
+    - `xrandr --screen 0 -s 1280x960`
 
 
 ### w
@@ -331,7 +350,7 @@
     - `sudo id jara1` - check the id of the new user
     - `sudo usermod -a -G adm jara1` - add the group adm to jara1
     - `id jara1` - verify jara1 id
-    - `userdel jara1` - delete user jara1
+    - `userdel --remove jara1` - delete user jara1
     - `id jara1` - verify jara1 was deleted
 
 ### groups
@@ -351,6 +370,7 @@
     - `usermode`
     - `USER`
     - `USERS`
+
 
 ### userdel
 - Example
@@ -397,10 +417,145 @@
         - 7=symbolic-link
     - `sudo blkid | grep -v loop` - excludes loop devices
 
-### 
+### exa
+- Example
+    - `sudo dnf install exa` - Install
+    - `exa --long --header --git` - usage
 
 
 ## Networking and troubleshooting
+
+### NetworkManager
+
+
+- Componentes
+    - Ip addresses
+    - Netmasks
+    - Default route
+    - Dns Nameserver
+
+- Interfaces
+    - `enp0s3`
+    - `ens32`
+    - `lo`
+
+#### nmcli
+
+- Example
+    - `nmcli`
+    - `nmcli device show` - complete list of devices
+    - `nmcli connection show` - overview of active connection profiles
+    - `nmcli device show enp0s3` - details of the interface enp0s3
+
+#### nmtui
+
+
+
+#### nm-connection-editor
+
+
+#### ip
+
+- Display and manager network data/info
+- Examples
+    - `ip route`
+        ```
+        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+            inet 127.0.0.1/8 scope host lo
+            valid_lft forever preferred_lft forever
+            inet6 ::1/128 scope host
+            valid_lft forever preferred_lft forever
+        2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+            link/ether 08:00:21:15:21:11 brd ff:ff:ff:ff:ff:ff
+            inet 192.168.101.13/24 brd 192.168.100.255 scope global dynamic noprefixroute enp0s3
+            valid_lft 85194sec preferred_lft 85194sec
+            inet6 fe80::a16:f250:fc8e:620/64 scope link noprefixroute
+            valid_lft forever preferred_lft forever
+        ```
+    - `ip address show`
+        ```
+        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+            inet 127.0.0.1/8 scope host lo
+            valid_lft forever preferred_lft forever
+            inet6 ::1/128 scope host
+            valid_lft forever preferred_lft forever
+        2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+            link/ether 08:00:27:21:11:11 brd ff:ff:ff:ff:ff:fa
+            inet 192.168.100.12/24 brd 192.168.100.255 scope global dynamic noprefixroute enp0s3
+            valid_lft 95994sec preferred_lft 85194sec
+            inet6 fe20::a26:f210:fc8e:620/24 scope link noprefixroute
+            valid_lft forever preferred_lft forever
+        ```
+
+#### ipcalc
+- Example
+    - `ipcalc 192.168.91.23/24`
+
+#### host and dig
+- Example
+    - `host www.linuxfoundation.org`
+    - `dig www.linuxfoundation.org`
+- Nameserver can be entered at `/etc/resolv.conf`
+
+
+## Network Troubleshoot
+
+- Steps:
+    - Validate Adapter is up
+        - Connections plugged in
+    - Validate local configuration
+        - ip
+        - netmask
+        - routes
+        - dhcp client
+    - Validate connections
+        - local system
+        - access defaul route service
+        - connect to a known good host by name
+    - Validate server functions
+        - validate daemons
+        - validate correct port
+        - validate localhost to check
+        - validate firewall
+
+### Validate Adapter is up
+- Examples
+    - List of devices:
+        - `ip link`
+        - `ip link | grep ": en"`
+        - `ip link | grep ": et"`
+
+    - disconnect/deactivate
+        - `sudo ip link set eno1 down`
+            -
+                ```
+                
+                ```
+    - connect/activate
+        - `sudo ip link set eno1 up`
+    - check
+        - `ip link | grep "eno1"`
+
+    - check the driver or optional driver for the device
+        - `sudo ethtool -i enp1s0`
+
+    - check the driver or optional driver for the device
+        - `sudo lshw -C network`
+
+
+
+
+### Validate connections
+
+
+### Validate server functions
+
+
+
+### Validate local configuration
+
+
+
 
 
 
@@ -428,7 +583,14 @@
 
 
 
-
+Id,Name,Number1,Value,Tax,Total
+1,qwe,123,20,2,30
+2,asd,234,40,4,40
+3,zxc,345,50,5,60
+4,zxc,345,60,7,70
+5,asd,234,10,4,40
+6,asd,234,30,4,40
+7,qwe,123,80,1,90
 
 
 
