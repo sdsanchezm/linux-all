@@ -310,13 +310,6 @@
 ### traceroute
 
 
-### xrandr
-
-- Change resolution (tested on rockyL)
-- Example
-    - `xrandr --screen 0 -s 1024x768`
-    - `xrandr --screen 0 -s 1280x960`
-
 
 ### w
 - Example:
@@ -397,7 +390,7 @@
 
 ### blkid
 - locate or print block device attributes
-    - 
+    - ``
 - Example
     - `sudo blkid`:
         ```
@@ -543,20 +536,39 @@
         - `sudo lshw -C network`
 
 
-
+### Validate local configuration
+- 2 ways:
+    - NetworkManager to check info from local DHCP
+        - `nmcli con sho -a`
+    - Using ISC DHCP client
+        - `sudo dhclient -v eno1`
+        - `cat /var/lib/dhclient/dhclient.leases`
+        - `sudo ip address show`
+        - `sudo ip a`
+    
 
 ### Validate connections
+- Examples
+    - `ping -c 4 127.0.0.1`
+    - `ping -c 4 192.168.0.1`
+    - `ping -c 4 8.8.8.8`
+    - `ping -c 4 w‌ww.google.com`
+    - `elinks -dump w‌ww.google.com`
 
 
 ### Validate server functions
 
-
-
-### Validate local configuration
-
-
-
-
+- Example
+    - Checking daemons
+        - `sudo systemctl`
+        - `sudo systemctl status sshd.service`
+    - Verifying ports:
+        - `sudo ss -tlap`
+        - `sudo ss -tlapn`
+        - `curl ht‌‌‌tp://127.0.0.1:631 | head`
+        - `curl ht‌tp://127.0.0.1:19999 | head`
+    - checking firewall here
+        - `sudo iptables -vnL` 
 
 
 
@@ -583,18 +595,87 @@
 
 
 
-Id,Name,Number1,Value,Tax,Total
-1,qwe,123,20,2,30
-2,asd,234,40,4,40
-3,zxc,345,50,5,60
-4,zxc,345,60,7,70
-5,asd,234,10,4,40
-6,asd,234,30,4,40
-7,qwe,123,80,1,90
+
+## Nice Tools
+
+### xrandr
+
+- Change resolution (tested on rockyLinux 9)
+- Example
+    - `xrandr --screen 0 -s 1024x768`
+    - `xrandr --screen 0 -s 1280x960`
+
+### fzf
+- Fuzy finder, helps find things easyly
+- Info at: (repo here)[https://github.com/junegunn/fzf?tab=readme-ov-file]
+- Install
+    - `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf`
+    - `~/.fzf/install`
 
 
+### bat 
+- Is like cat but with colors
+- Source `mmqDYw9C30I`
+- Install
+    - `sudo dnf install bat`
+- Usage
+    - `bat ** [tab]` - it highlights the text
+
+### tldr
+- Nice summary for a command
+- Install
+    - `sudo dnf install tldr`
+- Usage example
+    - `tldr eza`
+
+### eza
+- it's a better ls
+- might required nerd-fonts
+- Install 
+    - `dnf install eza`
+- Usage
+    - `eza --color=always --long --git`
+    - `eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions`
+    - `eza --tree --level=2`
+
+### git-delta
+- Install
+    - `sudo dnf install git-delta`
+- Setup on .gitconfig:
+    ```
+    [user]
+        name = Rober Galarga
+        email = rober.galar@example.com
+        username = example
+    [core]
+        editor = nvim
+    [init]
+        defaultBranch = main
+    [core]
+        pager = delta
+    [interactive]
+        diffFilter = delta --color-only
+    [delta]
+        navigate = true
+    [merge]
+        conflictStyle = diff3
+    [diff]
+        colorMoved = default
+    ```
+- Usage:
+    - `git diff oyiu8ew7r`
+- nice gitconfig example
+    - (here)[https://gist.github.com/pksunkara/988716]
 
 
+### nerd-fonts
+- jsut cool fonts
+- get ttf files from: (fonts)[https://www.nerdfonts.com/font-downloads]
+- Install (just copy ttfs into `~/.local/share/fonts`)
+    - `cd ~/.local/share`
+    - `mkdir fonts`
+    - `mv ~/temp\*ttf ./`
+- Font is now selectable (fira code is the best XD)
 
 
 
