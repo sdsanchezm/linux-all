@@ -574,8 +574,36 @@
 
 ## software and cloud concepts
 
+### Key Features
 
+- Key points
+    - More performant and agile
+    - Save money
+    - Easy Access
+    - Maintenance done
+    - Multi-tenant
+    - More Reliable
+    - More Secure
 
+- Models
+    - All 3 classic, plus: FaaS
+
+- Type of Cloud deploys
+    - public
+    - private
+    - hybrid
+
+- Cost and Savings
+    - Implementation Phase
+        - identify, what can stay onPremise and what can go to the cloud
+        - Reduced phgysical infrastructure
+        - Cloud does not age
+        - planning and implementation analysis is available from major cloud providers
+    - Runtime phase
+        - Right Size
+        - autoScaling - consume while need
+        - Use low performant resources on cloud, could help to save
+        - Low usage resourses
 
 ## Security fundamentals
 
@@ -590,13 +618,70 @@
 
 
 ## supporting apps and devs
+- SDLC
+- SW PM
+    - Waterfall
+        - phases
+            - plan
+            - design
+            - deliver
+            - test
+            - launch
+        - issues
+            - changes in later stages
+            - dependencies
+    - Agile
+        - Meetings
+            - Daily, 10 to 15mins a day
+        - Unit of work
+            - sprints (1 t o4 weeks)
+        - Requirements are prioritized
+        - Produce something taht works during each sprint
+        - Feedback is provided every sprint (from stakeholders)
+        - Feedback is used to make changes considered in the next sprint
+        - In Backlog
+            - broken down
+            - prioritized
+            - sized (effort)
+        - Use 12 Agile principles
+            1. The highest priority is to satisfy the customer through the early and continuous delivery of valuable software.
+            2. Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage.
+            3. Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.
+            4. Business people and developers must work together daily throughout the project.
+            5. Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.
+            6. The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.
+            7. Working software is the primary measure of progress.
+            8. Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.
+            9. Continuous attention to technical excellence and good design enhances agility.
+            10. Simplicity, the art of maximizing the amount of work not done–is essential.
+            11. The best architectures, requirements, and designs emerge from self-organizing teams.
+            12. At regular intervals the team reflects on how to be more effective, then adapt and adjusts its behavior accordingly.
+- SW Architecture
+    - FrontEnd
+        - Frameworks
+            - router
+            - modules
+            - 
+    - BackEnd
+        - Servers
+        - apis
+        - database servers
+        - Frameworks
+            - Ruby
+            - Express
+    - Design Patterns
+        - monolithic architecture
+        - Client-server (2-tier, 3-tiner)
+        - event driven
+        - component based
+        - rule based
+        - peer to peer
+        - multilayered
+        - service oriented arch (link)[https://en.wikipedia.org/wiki/Service-oriented_architecture]
+        - microservices
+        - rest 
 
-
-
-
-
-
-## Nice Tools
+## Nice Linux Tools
 
 ### xrandr
 
