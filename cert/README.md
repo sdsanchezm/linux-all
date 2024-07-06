@@ -764,6 +764,40 @@
 
 
 
+### rsync
+- Examples
+    - `rsync -avh /home/thisistheuser /home/thisistheuser/otherdirectory` - 
+    - `rsync -avh /home/thisistheuser thisistheuser@remoteHost:/home/thisistheuser/otherdirectory` - using ssh
+    - `rsync -avh --delete /home/thisistheuser /home/thisistheuser/otherdirectory` - this will not preserve deleted files in local to remote
+
+### xclip
+- there are 2 "buffers":
+    - System clipbard (normally the `-selection clipboard` flag, is used)
+    - X Window clipboard (use just the `xclip` and the `xclip -o` in terminal)
+- install
+    - `sudo dnf install xclip`
+- Example
+    - `pwd | xclip -selection clipboard`
+    - `ssh thisistheuser@remoteHost "cat /aFile.txt" | xclip -selection clipboard`
+    - `echo "qweasdzxc" | xclip -selection clipboard`
+    - `xclip -o` - shows the content of xclip
+    - `xclip -o > file.txt` - send the content of xclip to a file.txt
+    - `xclip`
+    - `xclip-copyfile`
+    - `xclip-cutfile`
+    - `xclip-pastefile`
+
+
+### Packages
+- List all packages installed by the user
+    - `dnf history userinstalled` - history of installed packages
+    - `rpm -qa` - all rpm installed
+    - `dnf list installed` - list all packages installed
+    - `pkcon search name ftp` - search for an specific package
+
+
+
+
 
 
 
