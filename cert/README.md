@@ -379,6 +379,65 @@
 - Example
     - `deluser`
 
+### User Files
+- Files for user management
+    - `/etc/group` - Each line: a group that includes: group name, password, Group ID (GID), and a list of members
+    - `/etc/passwd` - Each line: a user that includes: username, password User ID (UID), Group ID (GID), user information, home directory, and login shell
+    - `/etc/shadow` - Each line: a user that includes: username, password (encrypted), date of last password change, and other fields related to password expiration and account locking
+    - `/etc/gshadow` - Each line: a group that includes: group name, password (encrypted), Group Administrators, and group members/users
+    - `/etc/sudoers` - Shouldn't be modified, instead user the `visudo` command
+        - `visudo` - do not edit sudoers, just use `visudo` command
+            - `tiche    ALL=(ALL:ALL) ALL` - that's all, jsut add this line
+    - `/etc/default/useradd` - this defines default aspects of user creation, like the terminal, home directory, etc
+- Files under `/etc/skel` will be automatically copied into the `/home/<user>` everytime a new user is created [x]
+
+
+### view all users
+- Example
+    - `cat /etc/passwd`
+    - `cut -d: -f1 /etc/passwd`
+
+### view all groups
+- Example
+    - `cat /etc/group`
+    - `cut -d1 -f1 /etc/group`
+
+### add a user to a group
+- Example
+    - `sudo usermod -aG myGroup tiche`
+
+### User password
+- Change password of a user (user: jara in this case): 
+    - `sudo passwd jara`
+
+### User shell (chsh)
+- To validate `/etc/passwd` - last record
+- Example
+    - `sudo chsh jara` - then `/usr/bin/zsh`
+
+### Log as user
+- Example
+    - `su - jara`
+    - `su jara`
+
+### change the user id
+- files and folders wil not automatically change, might be rquired to manually update files
+- Example
+    - `sudo usermod -u 2021 tiche` - 2021 is a random user id
+- updating files: change from 1001 to 550
+    - `find / -user 1001 -exec chown -h 550 {} \;`
+
+### find all files from a specific user (using the user id)
+- Example
+    - `find /home -user 1001`
+
+### change the owner of a file or dir
+- Example
+    - `chown -h user /home/tiche/folder`
+    - Recursively (all dirs)
+        - `chown -R tiche:tichegroup /home/tiche/folder`
+
+
 ### id 
 
 - display the actual user id and groups
@@ -387,6 +446,7 @@
             - `uid=1000(ss) gid=1000(ss) groups=1000(ss),10(wheel) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023`
         - `sudo id`
             - `uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023`
+
 
 ### blkid
 - locate or print block device attributes
