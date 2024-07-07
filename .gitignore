@@ -16,3 +16,7 @@
 .nfs*
 
 # End of https://www.toptal.com/developers/gitignore/api/linux
+
+# some internal powershell scripts that are not required in this repo
+# (irony, but im woking on windows and rockyLin is virtualized, and Fedora is my WSL XD)
+*.ps1

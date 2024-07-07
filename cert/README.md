@@ -1,5 +1,83 @@
 # Tracking
 
+- [Tracking](#tracking)
+- [Generals](#generals)
+- [Backup](#backup)
+- [Filesystems and file management](#filesystems-and-file-management)
+- [User and System Administration commands](#user-and-system-administration-commands)      
+  - [cat](#cat)
+  - [cd](#cd)
+  - [find](#find)
+  - [grep](#grep)
+  - [info](#info)
+  - [ls](#ls)
+  - [man](#man)
+  - [pwd](#pwd)
+  - [chgrp](#chgrp)
+  - [chmod](#chmod)
+  - [chown](#chown)
+  - [fdisk](#fdisk)
+  - [iostat](#iostat)
+  - [ss](#ss)
+  - [free](#free)
+  - [df](#df)
+  - [ps](#ps)
+  - [vmstat](#vmstat)
+  - [dig](#dig)
+  - [ip](#ip)
+  - [netstat](#netstat)
+  - [ping](#ping)
+  - [traceroute](#traceroute)
+  - [w](#w)
+  - [Systemctl](#systemctl)
+  - [adduser](#adduser)
+  - [groups](#groups)
+  - [users](#users)
+  - [userdel](#userdel)
+  - [usermod](#usermod)
+  - [deluser](#deluser)
+  - [User Files](#user-files)
+  - [view all users](#view-all-users)
+  - [view all groups](#view-all-groups)
+  - [add a user to a group](#add-a-user-to-a-group)
+  - [User password](#user-password)
+  - [User shell (chsh)](#user-shell-(chsh))
+  - [Log as user](#log-as-user)
+  - [change the user id](#change-the-user-id)
+  - [find all files from a specific user (using the user id)](#find-all-files-from-a-specific-user-(using-the-user-id))
+  - [change the owner of a file or dir](#change-the-owner-of-a-file-or-dir)
+  - [id](#id)
+  - [blkid](#blkid)
+  - [exa](#exa)
+- [Networking and troubleshooting](#networking-and-troubleshooting)
+  - [NetworkManager](#networkmanager)
+    - [nmcli](#nmcli)
+    - [nmtui](#nmtui)
+    - [nm-connection-editor](#nm-connection-editor)
+    - [ip](#ip)
+    - [ipcalc](#ipcalc)
+    - [host and dig](#host-and-dig)
+- [Network Troubleshoot](#network-troubleshoot)
+  - [Validate Adapter is up](#validate-adapter-is-up)
+  - [Validate local configuration](#validate-local-configuration)
+  - [Validate connections](#validate-connections)
+  - [Validate server functions](#validate-server-functions)
+- [software and cloud concepts](#software-and-cloud-concepts)
+  - [Key Features](#key-features)
+- [Security fundamentals](#security-fundamentals)
+- [Devops fundamentals](#devops-fundamentals)
+- [supporting apps and devs](#supporting-apps-and-devs)
+- [Nice Linux Tools](#nice-linux-tools)
+  - [xrandr](#xrandr)
+  - [fzf](#fzf)
+  - [bat](#bat)
+  - [tldr](#tldr)
+  - [eza](#eza)
+  - [git-delta](#git-delta)
+  - [nerd-fonts](#nerd-fonts)
+  - [rsync](#rsync)
+  - [xclip](#xclip)
+  - [Packages](#packages)
 
 ## Generals
 
@@ -160,7 +238,7 @@
 
     - devices:
         - 0=unknown
-        - 1=regular-file
+        - 1=regular-file 
         - 2=directory, 
         - 3=character-device
         - 4=block-device
@@ -311,9 +389,12 @@
 
 
 
-### w
+### w, who and users
 - Example:
     - show who is logged in and what they're doing
+    - `w` - shows who is connected to the server
+    - `who` - shows who is connected to the server
+    - `users` - shows who is connected to the server
 
 
 ### Systemctl
@@ -400,7 +481,7 @@
 ### view all groups
 - Example
     - `cat /etc/group`
-    - `cut -d1 -f1 /etc/group`
+    - `cut -d: -f1 /etc/group`
 
 ### add a user to a group
 - Example
@@ -667,8 +748,98 @@
 
 ## Security fundamentals
 
+### sudoers
+- Examples
+    - the file is in `/etc/sudoers`
+    - Example for the user jara (should include `@include /etc/sudoers.d` in the file in sudoers.d/jara dir)
+        - `cat /etc/sudoers.d/jara`
+            - `student  ALL=(ALL:ALL) ALL`
+    - Example of a full sudo privileges
+        - `username ALL=(ALL:ALL) ALL`
+    - Example of a sudo privileges with no passwd
+        - `username ALL=(ALL:ALL) NOPASSWD: ALL`
+    - Example of a group with sudo privileges
+        - `%thisisagroup ALL=(ALL:ALL) ALL`
+    - Example to allow user to run 
+        - `username ALL=(ALL) /usr/bin/commandA, /usr/bin/commandB`
+    - Example to allow user to run all commands in a specific directory
+        - `username ALL=(ALL) /usr/bin/`
+    - Example of passwd file
+        - `tail -n 3 /etc/passwd`
+            - `jara:x:1002:1002::/home/jara:/usr/bin/zsh`
+                - jara - is the username
+                - x os the encrypted password
+                - userid
+                - groupid
+                - gecos
+                - home dir
+                - default shell
+    - 
 
 
+
+- File `etc/shadow`
+    - username
+    - encrypted password
+    - last changed
+    - min pass age
+    - pass warning period
+    - pass inactivity period
+    - account expiration date
+    - reserved field
+
+- View details about the user password
+    - `chage -l jara`
+        ```bash
+        Last password change                                 : Jul 03, 2024
+        Password expires                                     : never
+        Password inactive                                    : never
+        Account expires                                      : never
+        Minimum number of days between password change       : 0
+        Maximum number of days between password change       : 99999
+        Number of days of warning before password expires    : 7    
+        ``` 
+    - Examples
+        - `chage -M 30 jara` - max number of days betw pass change
+        - `chage -m 7 jara`- min number of days betw pass change
+        - `chage -W 10 jara` - set number of days of warning before passw expires
+        - `chage -E 2024-12-31 jara` - set the account expiry date
+        - `chage -I 7 jara` - set user inactive for 7 days after pass expire
+        - `chage -d 2024-07-01 jara` - Set account exp date
+        - `chage -E -1 jara` - remove expire date for the user jara
+        - `chage -M 60 -m 5 -W 7 jara` - all combined
+
+### File Permissions
+
+- Example
+    - `ls -l`
+        - mode of permissions fields
+        - link count
+        - user/owner of the file
+        - group of the file
+        - size (bytes)
+        - month
+        - day
+        - time
+        - file
+    - rwx - Read Write Execute (4,2,1)
+        - 777 => 
+            - 4 + 2 + 1 = 7
+            - 4 + 2 + 1 = 7
+            - 4 + 2 + 1 = 7
+        - UGO - User, Group, Others
+    - Example:
+        - -rw-r--r--
+            - file (first - indicates regular file)
+            - rw- means 4 + 2 + 0 = 6 (User can read and write no execute)
+            - r-- means 4 + 0 + 0 = 4 (Group can read no write no execute)
+            - r-x means 4 + 0 + 1 = 5 (Others can read no write and execute)
+        - `chmod 645 file1.txt`
+        - `chmod o-x file1.txt`
+        - `chmod g+x file1.txt`
+        - `chmod u+w file1.txt`
+        - `chmod o-w,g+r file1.txt`
+        - `chmod u=rwx, g=rwx, o=rwx file1.txt`
 
 
 ## Devops fundamentals
