@@ -455,6 +455,12 @@
 ### usermod
 - Example
     - `usermod`
+- Lock a user
+    - `sudo passwd -l username`
+    - `sudo usermod -L username`
+- Unlock a user
+    - `sudo passwd -u username`
+    - `sudo usermod -U username`
 
 ### deluser
 - Example
@@ -555,6 +561,13 @@
 - Example
     - `sudo dnf install exa` - Install
     - `exa --long --header --git` - usage
+
+### Logs
+- by defaul stored on:
+    - `/ver/logs`
+- Config
+    - `/etc/syslog.conf`
+    - `/etc/rsyslog.conf`
 
 
 ## Networking and troubleshooting
@@ -774,9 +787,6 @@
                 - gecos
                 - home dir
                 - default shell
-    - 
-
-
 
 - File `etc/shadow`
     - username
@@ -808,6 +818,43 @@
         - `chage -d 2024-07-01 jara` - Set account exp date
         - `chage -E -1 jara` - remove expire date for the user jara
         - `chage -M 60 -m 5 -W 7 jara` - all combined
+
+
+### ACL
+- Example
+    - getfacl
+        - `getfacl Main.java`
+    - setfacl
+        - `setfacl --modify u:jara:rw Main.java`
+
+
+### AIDE
+- Advanced Intrusion Detection environment (AIDE)
+- Examples:
+    - Instal
+        - `sudo dnf install aide`
+    - Start
+        - `sudo aideinit`
+    - Config
+        - `sudo aide --config-check /etc/aide/aide.conf`
+- Other security systems are:
+    - Selinux
+    - Tripwire (open)
+    - Fail2Ban
+    - OSSEC
+    - Snort
+
+### Single user mode
+- Example
+    - `sudo init 1` - this is a way to enable the single user mode
+    - `sudo reboot` - o back to multi user mode or graphical
+    - `sudo init 3` - multi user mode
+    - `sudo init 5` - graphical mode
+- with `systemd` init has been replaced
+    - `sudo systemctl isolate rescue.target`
+    - `sudo systemctl isolate emergency.target`
+
+
 
 ### File Permissions
 
@@ -844,7 +891,13 @@
 
 ## Devops fundamentals
 
-
+- Configuration Management
+- Continuos Integration
+- Automated test
+- Infrastructure as code
+- Continuos Delivery
+- Continuos Deployment
+- Continuos Monitoring
 
 
 
@@ -911,6 +964,15 @@
         - service oriented arch (link)[https://en.wikipedia.org/wiki/Service-oriented_architecture]
         - microservices
         - rest 
+
+- Git
+    - Best Practices
+        1. commit often -  small changes are more trackable 
+        2. detailed notes in commit log - Changelog should be clear, save time, other teammates need to understand changes
+        3. work on latest version - may miss changes made by others
+        4. Review changes before commit - better to avoid correct commits
+        5. Use branches. - allow collaboration easy. Work can be done in parallel
+
 
 ## Nice Linux Tools
 
