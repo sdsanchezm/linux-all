@@ -74,7 +74,9 @@
     - `sudo chown -R sambauser:sambagroup /home/kk1/toshare`
     - `sudo chmod -R g+w /home/kk1/toshare`
 
+## documentation
 
+- [https://www.redhat.com/sysadmin/samba-windows-linux](link)
 
 
 
