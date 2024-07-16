@@ -28,5 +28,10 @@
 
 - `mvn --version`
 - `sudo dnf install maven`
-- ``
-- ``
+- `mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
+- `java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App`
+
+
+## Misc
+
+- [maven documentation](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
