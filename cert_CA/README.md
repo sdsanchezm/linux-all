@@ -1101,10 +1101,12 @@
     - `cp *.*tf ~/.local/share/fonts`
     - `ls ~/.local/share/fonts`
     - `fc-cache -vf`
-- `mkdir ~/.config/nvim`
-- `git clone https://github.com/LazyVim/starter ~/.config/nvim`
-- `rm -rf ~/.config/.git`
-- `nvim`
+- documentation:
+  - [here](http://www.lazyvim.org/installation)
+  - `mkdir ~/.config/nvim`
+  - `git clone https://github.com/LazyVim/starter ~/.config/nvim`
+  - `rm -rf ~/.config/.git`
+  - `nvim`
 
 
 
