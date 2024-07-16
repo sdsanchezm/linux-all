@@ -78,6 +78,7 @@
   - [rsync](#rsync)
   - [xclip](#xclip)
   - [Packages](#packages)
+  - [neovim](#neovim)
 
 ## Generals
 
@@ -1088,9 +1089,22 @@
     - `dnf list installed` - list all packages installed
     - `pkcon search name ftp` - search for an specific package
 
-
-
-
+### Neovim
+- [docs](https://github.com/neovim/neovim/blob/master/INSTALL.md)
+- Extract
+    - `sudo tar -C /opt -xzf nvim-linux64.tar.gz`
+- add to path
+    - `export PATH="$PATH:/opt/nvim-linux64/bin"`
+- validate version
+    - `nvim -v`
+- Install Fonts:
+    - `cp *.*tf ~/.local/share/fonts`
+    - `ls ~/.local/share/fonts`
+    - `fc-cache -vf`
+- `mkdir ~/.config/nvim`
+- `git clone https://github.com/LazyVim/starter ~/.config/nvim`
+- `rm -rf ~/.config/.git`
+- `nvim`
 
 
 
