@@ -2,58 +2,99 @@
 # Samba configuration in Fedora Linux 39
 
 ## Install 
-- `sudo apt update`
--   ```
-    sudo apt install samba, samba-usershares
+- install: samba
     ```
-
--   ```
-    sudo systemctl status smb
+    sudo dnf install samba samba-usershares samba-common samba-client wsdd
+    sudo dnf groupinstall "Development Tools"
     ```
-- `sudo systemctl stop smb`
+## Stop Services
+- check status and Stop the services
+    - `sudo systemctl status smb`
+    - `sudo systemctl status nbm`
+    - `sudo systemctl status wsdd`
+    - `sudo systemctl start smb`
+    - `sudo systemctl start nbm`
+    - `sudo systemctl start wsdd`
 
-- File `sudo nvim /etc/samba/smb.conf`
-    ```
-    [global]
-    server string = File Server
-    workgroup = SNTT
-    security = user
-    map to guest = Bad User
-    name resolve order = bcast host
-    ```
+## Configuration (key part)
+- File `sudo vim /etc/samba/smb.conf`
+    - Example 1:
+        ```
+        [global]
+        server string = File Server
+        workgroup = SNTT
+        security = user
+        map to guest = Bad User
+        name resolve order = bcast host
+        include = /etc/samba/usershares.conf
+        ```
+    - Example 2:
+        ```
+        [global]
+        workgroup = SNKNTT
+        security = user
+        passdb backend = tdbsam
+        printing = cups
+        printcap name = cups
+        load printers = yes
+        cups options = raw
 
-- must install `samba-usershares` to make the below file works
-- `include = /etc/samba/usershares.conf`
+        [sambashare]
+        comment = public folder
+        path = /share
+        comment = samba
+        browseable = yes
+        writeable = yes
+        guest ok = yes
+        read only = no
+        ```
+    - Example 3:
+        ```
+        [global]
+        workgroup = SNKNTT
+        server string = Samba Server %v
+        netbios name = samba-server
+        security = user
+        map to guest = bad user
+        dns proxy = no
 
-- Create file (in Fedora it is auto created)
-- `sudo vim /etc/samba/usershares.conf`
+        [Public]
+        path = /sambashares/public_files
+        browsable =yes
+        writable = yes
+        guest ok = yes
+        read only = no
+        ```
+    - This is the content of the file `usershares.conf`
+        ```
+        [Public Files]
+        path = /sambashares/public_files
+        force user = sambauser
+        force group = sambagroup
+        create mask = 0664
+        force create mode = 0664
+        directory mask = 0775
+        force directory mode = 0775
+        public = yes
+        writable = yes
+        
+        [Protected Files]
+        path = /sambashares/private_files
+        force user = sambauser
+        force group = sambagroup
+        create mask = 0664
+        force create mode = 0664
+        directory mask = 0775
+        force directory mode = 0775
+        public = yes
+        writable = no
+        ```
 
-- This is the content of the file `usershares.conf`
+- must install `samba-usershares` to make the below file automatically appear on `/etc/samba/`
+    - `sudo vim /etc/samba/usershares.conf`
+    - and the below line to include it in the global configuration
+        - `include = /etc/samba/usershares.conf`
 
-- File `sudo nvim /etc/samba/usershares.conf`
-    ```
-    [Public Files]
-    path = /home/kk1/toshare/public_files
-    force user = sambauser
-    force group = sambagroup
-    create mask = 0664
-    force create mode = 0664
-    directory mask = 0775
-    force directory mode = 0775
-    public = yes
-    writable = yes
-    
-    [Protected Files]
-    path = /home/kk1/toshare/private_files
-    force user = sambauser
-    force group = sambagroup
-    create mask = 0664
-    force create mode = 0664
-    directory mask = 0775
-    force directory mode = 0775
-    public = yes
-    writable = no
-    ```
 
 ## Create samba user and group
 
@@ -64,19 +105,61 @@
 - validate if user sambauser was created and registered ok
     - `cat /etc/passwd`
 
-- Create shared directories
+- create samba user:
+    - `sudo smbpasswd -a sambauser`
 
-    - `sudo mkdir -p /home/kk1/toshare/public_files`
-    - `sudo mkdir /home/kk1/toshare/private_files`
+## Create folders and set permissions
+
+- Create shared directories
+    - `sudo mkdir -p /sambashares/public_files`
+    - `sudo mkdir /sambashares/private_files`
 
 - Change ownership/permissions
+    - either
+        - `sudo chown -R sambauser:sambagroup /sambashares`
+    - or
+        - `sudo chmod -R nobody:nobody /sambashares`
+    - `sudo chmod -R g+w /sambashares`
+    - `sudo chcon -t samba_share_t /sambashares`
+    - either:
+        - `sudo chmod -R 777 /sambashares`
+        - or
+        - `sudo chmod -R 755 /sambashares`
+        
+    - may vary depending on distro...
 
-    - `sudo chown -R sambauser:sambagroup /home/kk1/toshare`
-    - `sudo chmod -R g+w /home/kk1/toshare`
+
+## Restart Services
+
+- Start/Restart the services, necesarry in Rocky Linux
+    - `sudo systemctl restart wsdd`
+    - `sudo systemctl restart smb`
+    - `sudo systemctl restart nbm`
+
+## Firewall config 
+
+- use firewall-cmd to allow services permanently
+    - `firewall-cmd --add-service=samba --zone=public --permanent`
+    - `firewall-cmd --permanent --add-service=samba`
+    - `firewall-cmd --reload`
+
+- Allow the services: `smb` `nmb` and `wsdd` in the firewall configuration
+    - open `firewall-config`
+    - allow `smb` `nmb` and `wsdd` services
+    - restart the 3 services
+
+## Testing access
+- test samba parameters
+    - `testparm`
+
+- use sambaclient to validate access
+    - `smbclient -L 192.168.100.129 -U davstemp`
+    - `smbclient -L 192.168.100.137 -U kraus`
 
 ## documentation
 
-- [https://www.redhat.com/sysadmin/samba-windows-linux](link)
+- [https://www.redhat.com/sysadmin/samba-windows-linux](https://www.redhat.com/sysadmin/samba-windows-linux)
+- [iHmcV5vbuUg](iHmcV5vbuUg)
 
 
 
