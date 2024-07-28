@@ -1,7 +1,22 @@
 # cert CS Topics
 
+## Details
 
-## Operations Deployment
+- Topics and %
+    - Essential Commands (25%)
+    - Operation of Running Systems (20%)
+    - User and Group Management (10%)
+    - Networking (12%)
+    - Service Configuration (20%)
+    - Storage Management (13%)
+- Notes
+    - Note: 120 mins
+    - performance based
+
+
+## General Topics
+
+### Operations Deployment
 
 - [] Configure 
     - kernel parameters
@@ -27,7 +42,7 @@
     - MAC using SELinux
 
 
-## Networking
+### Networking
 
 - Configure 
     - IPv4 and IPv6 networking 
@@ -53,7 +68,7 @@
     - load balancers
 
 
-## Storage
+### Storage
 
 - Configure and manage
     - LVM storage
@@ -73,7 +88,7 @@
     - storage performance
 
 
-## Essential Commands
+### Essential Commands
 
 - Basic Git Operations
 - Create, configure, and troubleshoot
@@ -90,7 +105,7 @@
     - with SSL certificates
 
 
-## Users and Groups
+### Users and Groups
 
 - Create and manage 
     - local user 
@@ -108,24 +123,42 @@
 
 
 
+## Chapters
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- Introduction
+- Linux Filesystem Tree Layout
+- User Environment
+- User Account Management
+- Group Management
+- File Permissions and Ownership
+- Package Management Systems
+- dpkg
+- APT
+- RPM
+- dnf and yum
+- zypper
+- GIT Fundamentals
+- Processes
+- Process Monitoring
+- Memory Monitoring, Usage and Configuring Swap
+- I/O Monitoring
+- Containers Overview
+- Linux Filesystems and the VFS
+- Disk Partitioning
+- Filesystem Features: Attributes, Creating, Checking, Usage, Mounting
+- The EXT4 Filesystem
+- Logical Volume Management (LVM)
+- Kernel Services and Configuration
+- Kernel Modules
+- Devices and udev
+- Network Addresses
+- Network Devices and Configuration
+- LDAP
+- Firewalls
+- System Init: systemd History and Customization
+- Backup and Recovery Methods
+- Linux Security Modules
+- System Rescue
 
 
 
