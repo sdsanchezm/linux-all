@@ -1108,10 +1108,84 @@
   - `rm -rf ~/.config/.git`
   - `nvim`
 
+### Services
+
+- systemd also manage scripts at startup
+- on `/etc/systemd/system`
+    ```sh
+    # /etc/systemd/system/sstest.service
+    [Service]
+    Type=oneshot
+    RemainAfterExit=yes
+    ExecStart=/usr/local/libexec/my-startup-script
+    ExecStart=/etc/sstest.local
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+    ```sh
+    [Unit]
+    Description=/etc/sstest.local Compatibility
+    ConditionPathExists=/etc/sstest.local
+
+    [Service]
+    Type=forking
+    ExecStart=/etc/sstest.local start
+    TimeoutSec=0
+    StandardOutput=tty
+    RemainAfterExit=yes
+    SysVStartPriority=99
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+- the script should be (shebang required) `/etc/datetofile.sh` or `/etc/rc.local` or `sstest.local`:
+    ```sh
+    #!/bin/bash
+    #echo $(date) > ~/date.txt
+    #
+    # eog ~/Pictures/dom2.png
+    wall "test"
+    exit 0
+    ```
+
+- Reload the daemon if required
+    - `systemctl daemon-reload `
+- Enable and restart the service
+    - `systemctl enable sstest.service`
+    - `systemctl restart sstest.service`
+- review the journal in case errors
+    - `journalctl -xeu sstest.service`
+
+- [documentation](https://linuxhandbook.com/create-systemd-services/)
 
 
+### Environment Variables
 
+1. `PATH`: Specifies a list of directories where the shell looks for executable files. When you type a command, the shell searches these directories in the specified order
+2. `HOME`: Represents the current user's home directory
+3. `USER`: Contains the username of the current user
+4. `SHELL`: Specifies the path to the current user's shell, like `/bin/bash` or `/bin/zsh`
+5. `PWD`: Stands for "Present Working Directory," indicating the current directory the user is in
+6. `LOGNAME`: Contains the name of the current user
+7. `LANG` or `LC_*`: Defines the locale settings, which determine the language and regional settings for the system
+8. `TERM`: Specifies the type of terminal to emulate when running the shell
+9. `EDITOR` or `VISUAL`: Defines the default text editor to be used, e.g., `vim` or `nano`
+10. `MANPATH`: Specifies the list of directories to search for manual pages
+11. `MAIL`: Contains the path to the user's mailbox
+12. `TMPDIR`: Defines the directory for temporary files
+13. `HOSTNAME`: Indicates the name of the host system
+14. `OLDPWD`: Stores the previous working directory, allowing you to return to it with `cd -`
+15. `DISPLAY`: Used in systems running X11 to define the display server used for GUI applications
+    - `export DISPLAY=:0`
+    - `xdpyinfo`
+16. `SSH_CLIENT` and `SSH_CONNECTION`: Provide information about the current SSH connection, such as the client IP address and port
+17. `LD_LIBRARY_PATH`: Specifies directories to search for shared libraries before the default locations
 
+- env vars can be:
+    - set - `set`
+    - modified - `export`
+    - viewed - `env`, and `printenv`
 
 
 
