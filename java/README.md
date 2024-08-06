@@ -18,19 +18,25 @@
 - `java -version`
 
 ## Compile
+
 - Generate the class
-    - `javac Main.java`
+  - `javac Main.java`
 - Run the class
-    - `java Main`
-    - `java Main.class`
+  - `java Main`
+  - `java Main.class`
 
 ## Maven
 
 - `mvn --version`
 - `sudo dnf install maven`
-- `mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
-- `java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App`
-
+- create terminal project
+  - `mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
+- or
+  - `mvn mvn archetype:generate -DgroupId=lat.kop.app -DartifactId=project1 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
+- build and compile
+  - `java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App`
+- or
+  - `java -cp target/project1-SNAPSHOT.jar lat.kop.project1.App`
 
 ## Misc
 
