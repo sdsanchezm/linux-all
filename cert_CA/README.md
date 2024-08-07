@@ -1082,14 +1082,36 @@
     - `xclip-pastefile`
 
 
-### Packages
+### Packages and dnf
 - List all packages installed by the user
     - `dnf history userinstalled` - history of installed packages
     - `rpm -qa` - all rpm installed
     - `dnf list installed` - list all packages installed
     - `pkcon search name ftp` - search for an specific package
 
+- list repos
+    - `dnf repolist`
+- clean metadata
+    - `dnf clean metadata`
+- show duplicates of specific lib (libuv in this case)
+    - `sudo dnf --showduplicates list libuv`
+- remove duplicates
+    - `sudo dnf remove --duplicates`
+- reset the module and reinstall the module
+    - `sudo dnf module reset libluv`
+    - `sudo dnf reinstall libluv`
+- remove neovim, clean and reinstall neovim
+    - `sudo dnf remove neovim && sudo dnf clean all && sudo dnf install neovim`
+- package info
+    - `dnf info neovim`
+    - `dnf info libuv`
+    - `dnf info libluv`
+
+### Vscodium 
+- official site: [https://vscodium.com/](here)
+
 ### Neovim
+- official: [https://neovim.io/](https://neovim.io/)
 - [docs](https://github.com/neovim/neovim/blob/master/INSTALL.md)
 - Extract
     - `sudo tar -C /opt -xzf nvim-linux64.tar.gz`
