@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # script to check os variables
 
 option2=2
