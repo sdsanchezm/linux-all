@@ -18,7 +18,11 @@
 
 ## VARS
 - `/etc/profile` all vars for the system
+- vars scoope is limted to the process that created them unless "export" is used
 
+
+
+## vim basic
 - details at
     - [https://gist.github.com/ruph/1437650]
     - [https://blog.desdelinux.net/la-configuracion-para-vim-definitiva/]
