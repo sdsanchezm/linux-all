@@ -13,8 +13,8 @@ echo "size of array of strings:${#arrayOfStrings[*]}"
 echo "size of array of Ranges:${#arrayOfRanges[*]}"
 
 echo "position 3 array of Numbers:${arrayOfNumbers[3]}"
-echo "position  3 array of strings:${arrayOfStrings[3]}"
-echo "position  3 array of Ranges:${arrayOfRanges[3]}"
+echo "position 3 array of Strings:${arrayOfStrings[3]}"
+echo "position 3 array of Ranges:${arrayOfRanges[3]}"
 
 # specific position, 20
 arrayOfNumbers[7]=20
@@ -24,6 +24,5 @@ unset arrayOfNumbers[0]
 echo "array of Numbers:${arrayOfNumbers[*]}"
 # get the size of it
 echo "size array of Ranges:${#arrayOfNumbers[*]}"
-
 
 
