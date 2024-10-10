@@ -71,4 +71,5 @@
     - [https://blog.desdelinux.net/la-configuracion-para-vim-definitiva/]
 
 
-
+## bash cheatSheet
+- [https://devhints.io/bash]
