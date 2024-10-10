@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# dnf/apt install zip
+# dnf/apt install pbzip2
+
 echo "pack all scripts in a tar file named scriptBackup"
 tar -cvf scriptBackup.tar *.txt
 
