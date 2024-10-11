@@ -16,6 +16,15 @@
     - type and origin of the file
     - `type ls` or `type cd`
 
+## echo
+
+- read -n 1 -s -r -p "press enter to continue..."
+    - read: reads input from the user
+    - -n 1: read accept only one character of input
+    - -s: tells read to suppress output of the character entered (keeps input silent, often used for password entry)
+    - -r: ensures backslashes are not interpreted as escape characters
+    - -p displays a prompt message before waiting for the input
+
 ## VARS
 - `/etc/profile` all vars for the system
 - vars scoope is limted to the process that created them unless "export" is used
