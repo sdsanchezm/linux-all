@@ -674,6 +674,30 @@
 - Nameserver can be entered at `/etc/resolv.conf`
 
 
+## Services and daemons
+
+- how to create, normally 3 sections (/etc/serviceName/)
+    ```bash
+    [Unit]
+    Description=Custom Logging SS
+    After=multi-user.target
+    
+    [Service]
+    Type=simple
+    Restart=Always
+    ExecStart=sh /datelogs/scripts/logger1.sh
+    
+    [Install]
+    WantedBy=multi-user.target
+    ```
+- service mgmt
+    - `systemctl daemon-reload`
+    - `sudo systemctl status <serviceName>`
+    - `sudo systemctl start <serviceName>`
+    - `sudo systemctl enable <serviceName`>`
+    - `sudo systemctl status <serviceName>`
+    - `sudo systemctl disable <serviceName>`
+
 ## Network Troubleshoot
 
 - Steps:
