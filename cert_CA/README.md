@@ -114,6 +114,18 @@
 ## User and System Administration commands
 
 - Commands, list of options, arguments
+
+## Monitoring
+
+### top
+
+### htop
+
+### glances
+
+### bpvtop
+
+
 ### cat
 - Examples
     - `cat file.txt`
@@ -369,6 +381,22 @@
     - `df`
 
 ### ps
+
+- `Ps`
+- `Ps -aux`
+- `Ps -aux | grep davs`
+- `Ps -aux | grep less`
+- More at:
+    - [https://www.tecmint.com/linux-process-management/]
+
+### pidof, lsof
+- pidof
+    - `pidof less` (all pids using less)
+    - `pidof vim`
+    - `pidof systemd`
+
+- lsof (list all socket files)
+    - `sudo lsof -I :22` (list all socket connections on port 22, must be sudo)
 
 
 ### vmstat
