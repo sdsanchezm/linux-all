@@ -121,6 +121,10 @@
 
 ### htop
 
+- List of Signals in htop > F9
+    - Htop also allows to kill a process, using F9 > select Signal > press Enter
+- the menu is available in the application
+
 ### glances
 
 ### bpvtop
@@ -674,6 +678,52 @@
 - Nameserver can be entered at `/etc/resolv.conf`
 
 
+#### kill and killall
+
+- kill <OPTION> <PID>
+- Sends a signal to the process with the specified ID by default: SIGTERM
+
+- killall -9 <nameOfApp>
+- killall -9 less (will kill all named "less" apps in use)
+
+- kill <pid>
+- kill -9 <pid> (9 is the SIGKILL)
+- kill -s SIGKILL <pid>
+    - -1 # SIGHUP, restart the process
+    - -2 # SIGINT, interrupt the process
+    - -9 # SIGKILL, terminate the process forcing it
+    - -15 # SIGTERM, terminate the process in a normal way (default)
+    - -19 # SIGSTOP, pause the process
+    - -18 # SIGCONT, resume the process
+
+- List of Signals in htop > F9
+    - Htop also allows to kill a process, using F9 > select Signal > press Enter
+
+- kill does not terminate bg processes
+    - kill -s SIGKILL <pid>
+- Equivalent to
+    - kill -9 <pid> (9 is the SIGKILL)
+
+
+#### fg bg and jobs
+- Ampersand at the end (background execution)
+    - `fg %1`
+    - `bg`
+- Jobs -l (view all background jobs)
+    - Fg 1 (job 1 is brought it back to foreground)
+    - Fg 2 (job 2 is brought it back to foreground)
+    - `jobs` list all jobs
+
+
+## Processes
+
+- solumn "S" in htop
+    - running or runable (R)
+    - uninterruptible sleep (D)
+    - interruptible sleep (S)
+    - stopped (T)
+    - zombie (Z)
+
 ## Services and daemons
 
 - how to create, normally 3 sections (/etc/serviceName/)
@@ -697,6 +747,8 @@
     - `sudo systemctl enable <serviceName`>`
     - `sudo systemctl status <serviceName>`
     - `sudo systemctl disable <serviceName>`
+
+
 
 ## Network Troubleshoot
 
@@ -815,6 +867,15 @@
 ## Security fundamentals
 
 ### sudoers
+
+- Add a user to the sudoers file:
+
+    1. `sudo usermod -aG wheel jamecho`
+    2. `sudo visudo`
+- or add
+    - `%wheel ALL=(ALL) ALL`
+
+
 - Examples
     - the file is in `/etc/sudoers`
     - Example for the user jara (should include `@include /etc/sudoers.d` in the file in sudoers.d/jara dir)
@@ -898,11 +959,13 @@
     - Snort
 
 ### Single user mode
+
 - Example
     - `sudo init 1` - this is a way to enable the single user mode
     - `sudo reboot` - o back to multi user mode or graphical
     - `sudo init 3` - multi user mode
     - `sudo init 5` - graphical mode
+
 - with `systemd` init has been replaced
     - `sudo systemctl isolate rescue.target`
     - `sudo systemctl isolate emergency.target`
