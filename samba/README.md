@@ -217,6 +217,62 @@
         - `sudo chmod -R nobody:nobody /shared`
         - `sudo chcon -t samba_share_t /shared/samba1`
 
+## ubuntu config
+
+- Example File: */etc/samba/smb.conf*
+    ```bash
+    [global]
+        workgroup = SNKNTT
+        security = user
+        passdb backend = tdbsam
+        printing = cups
+        printcap name = cups
+        load printers = no
+        cups options = raw
+        include = /etc/samba/usershares.conf
+        client min protocol = SMB2
+
+    [share]
+        path = /shared/samba
+        writable = yes
+        browseable = yes
+        public = yes
+        read only = no
+        guest ok = yes
+        force user = nobody
+
+    [sharex]
+        comment = thisIsSAMBA2
+        path = /shared/samba2
+        writeable = yes
+        browseable = yes
+        public = yes
+        create mask = 0777
+        directory mask = 0777
+        write list = user
+
+    [sharey]
+        comment = thisIssharey
+        path = /shared/samba3
+        writeable = yes
+        browseable = yes
+        guest ok = no
+        read only = no
+        create mask = 0777
+        directory mask = 0777
+        write list = user
+        force create mode = 777
+        force directory mode = 777
+        force security mode = 777
+        force directory security mode = 777
+    ```
+- Example file */etc/samba/usershares.conf*
+    ```bash
+    [global]
+        usershare max shares = 100
+        usershare allow guests = yes
+    ```
+
 
 ## Testing access
 - test samba parameters
