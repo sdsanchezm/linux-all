@@ -148,6 +148,76 @@
     - allow `smb` `nmb` and `wsdd` services
     - restart the 3 services
 
+## kali (debian based) samba config
+
+- example `/etc/samba/smb.conf`
+    ```bash
+    [global]
+        workgroup = SNKNTT
+        security = user
+        passdb backend = tdbsam
+        printing = cups
+        printcap name = cups
+        load printers = no
+        cups options = raw
+        include = /etc/samba/usershares.conf
+        client min protocol = SMB2
+
+    [samba1]
+        comment = public folder
+        path = /shared/samba1
+        writeable = yes
+        browseable = yes
+        public = yes
+        guest ok = yes
+        read only = no
+        force user = nobody
+        create mask = 0777
+        directory mask = 0777
+        write list = user
+        force create mode = 777
+        force directory mode = 777
+        force security mode = 777
+        force directory security mode = 777
+
+    ```
+- example `/etc/samba/usershares.conf`
+    ```bash
+    [global]
+	    usershare max shares = 100
+	    usershare allow guests = yes
+    ```
+- commands
+    - install
+        - `sudo apt install samba`
+        - `sudo service nmbd status`
+        - `sudo service smbd status `
+    - user
+        - `sudo useradd --system --no-create-home --group sambagroup -s /bin/false sambauser`
+        - `sudo groupadd --system sambagroup`
+        - `sudo chown -R sambauser:sambagroup /shared`
+        - `sudo chown -R sambauser:sambagroup /shared/samba1`
+        - `getent passwd sambauser`
+    - sambauser
+        - `sudo smbpasswd -a sambauser`
+        - `testparm`
+    - firewall
+        - `sudo firewall-cmd --permanent --add-service=samba\nsudo firewall-cmd --reload`
+        - `sudo firewall-cmd --add-service=samba --zone=public --permanent`
+        - `sudo firewall-cmd --add-service=samba`
+        - `sudo firewall-cmd --reload`
+        - `sudo firewall-config`
+        - `sudo service firewalld status`
+        - `sudo service firewalld stop`
+    - folder config
+        - `sudo chmod -R 777 /shared`
+        - `sudo chmod -R g+w /shared`
+        - `sudo chmod -R g+w /shared/samba1`
+        - `sudo chmod -R nobody:nobody /shared/samba1`
+        - `sudo chmod -R nobody:nobody /shared`
+        - `sudo chcon -t samba_share_t /shared/samba1`
+
+
 ## Testing access
 - test samba parameters
     - `testparm`
