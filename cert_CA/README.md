@@ -452,13 +452,23 @@
 
 ### adduser
 - Example
-    - `adduser`
+    - `adduser jara1`
     - `sudo adduser jara1` - create the new user
     - `sudo id jara1` - check the id of the new user
+    - `id -u` - once logged in, check the id
+    - `id -un` - once logged in, check the username
+    - `cat /etc/passwd` - check the passwd file to see if user is created
+    - `su jara1` - log as the new user
     - `sudo usermod -a -G adm jara1` - add the group adm to jara1
     - `id jara1` - verify jara1 id
     - `userdel --remove jara1` - delete user jara1
     - `id jara1` - verify jara1 was deleted
+    - `sudo chfn jara1` - update user info
+    - `usermod --lock jara1` - lock a user ()
+    - `usermod --unlock jara1` - unlock a user
+    - `userdel jara1` - removes jara1
+    - `userdel -r jara1` - removes jara1 also removing directory
+
 
 ### groups
 - Examples
