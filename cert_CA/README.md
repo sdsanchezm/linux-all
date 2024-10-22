@@ -471,19 +471,36 @@
 
 
 ### groups
+- file
+    - `/etc/group` - file for all groups in system
+    - `ss:x:1002` - username:pwrt:groupid
+- find groups for a specific user
+    - `cat /etc/group | grep jara1`
+    - `groups` - show all groups of the actual user
+    - `getent group sudo`
 - Examples
-    - `groups`
-    - `groupadd`
-    - `groupdel`
+    - `groupmod -n <newname> <oldname>` - change the name of a group
+    - `groupadd <name>` - add a new group
+    - `groupdel <groupName>` - remove a group
+    - `gpasswd -d <nameOfUser> <nameOfGroup>` - remove a user from the group
     - `groupmems`
-    - `groupmod`
+    - `usermod -a -G <groupname> <username>` - add a user to a group
+        - `usermod -aG <groupname> <username>` - add a user to a group
+    - `chgrp <NameOfGroup> <pathToFileOrDirectory>`
+    - `chmod +s /share`
+
+
 
 ### users
 - Example
-    - `useradd`
+    - `useradd` - basic way, it does not create a home user and assign sh as default shell
+        - `useradd -m jara2` - creates a home folder
+        - `useradd -m -d /path/asd <userName>`
     - `userdbctl`
     - `userhelper`
     - `users`
+    - `userdel`
+    - `deluser`
     - `usermode`
     - `USER`
     - `USERS`
@@ -604,6 +621,11 @@
 - Example
     - `sudo dnf install exa` - Install
     - `exa --long --header --git` - usage
+
+### getent
+- `getent` - get entries from Name Service Switch libraries
+- Example
+    - `getent group sudo`
 
 ### Logs
 - by defaul stored on:
@@ -881,9 +903,12 @@
 - Add a user to the sudoers file:
 
     1. `sudo usermod -aG wheel jamecho`
+    1. `sudo usermod -a -G sudo jamecho`
     2. `sudo visudo`
 - or add
     - `%wheel ALL=(ALL) ALL`
+- edit `/etc/sudoers` (is a readonly file)
+    - to add `<userName> ALL=(ALL) ALL`
 
 
 - Examples
