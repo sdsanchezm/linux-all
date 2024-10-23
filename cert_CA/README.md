@@ -489,6 +489,30 @@
     - `chgrp <NameOfGroup> <pathToFileOrDirectory>`
     - `chmod +s /share`
 
+- Example 2 (good practice)
+    - `cat /etc/group`
+    - `groups <userName>`
+    - `less /etc/group | grep <userName>`
+    - `getent group sudo`
+    - `getent group friends`
+    - `sudo groupadd <groupName>`
+    - `sudo groupadd friends`
+    - `sudo groupmod -n <newNanme> <oldName>`
+    - `sudo groupmod -n friends freunde`
+    - `sudo chgrp <groupName> <pathOfFileOrDirectory>`
+    - `sudo chgrp friends /sharex`
+    - `mkdir ~/kk1`
+    - `chmod 770 ~/sharex`
+    - `sudo chmod +s /kk1`
+    - `sudo chmod +s /sharex` - any file/folder created inside this folder, will belong to the groupOwner (same as folder)
+    - `usermod -a -G friends jamecho`
+    - `usermod -a -G friends jara`
+    - `groupdel <groupName>`
+
+    - `sudo chmod g+<permisos> <pathToFileOrDir>`
+    - `sudo getfacl /pathToFileOrDir`
+    - `sudo gpasswd -d <userName> <groupName>`
+
 
 
 ### users
