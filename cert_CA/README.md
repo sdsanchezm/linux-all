@@ -1171,6 +1171,44 @@
         5. Use branches. - allow collaboration easy. Work can be done in parallel
 
 
+## Storage
+
+### lsblk 
+
+- `lsblk` - list all devices
+
+### fdisk 
+
+- `sudo fdisk -l` - list all devices
+- `sudo fdisk /dev/sdb` - starts the fdisk utility on /dev/sdb
+    - `m` - list all options
+    - peress n - creates a new partition
+    - then press p to select primary
+    - then keeps 2048 (hit enter)
+    - then enters the size (it could be `+3G` for 3 GB)
+    - then press `p` to preview the partitions
+    - then press `w` is to write partitions (no undo, NO UNDO)
+    - or press `q` exit with no changes
+- to validate
+    - `lsblk`
+
+### mkfs
+
+- `mkfs.ext4 /dev/sdb1` - creates a new ext4 fs on sdb1
+
+### mount and umount
+
+- `mkdir /temp1`
+- `sudo mount /dev/sdb1 /temp1`
+- `sudo umount /dev/sdb1`
+
+### fstab
+
+- automatically mounts a partition after reboot
+- `sudo vim /etc/fstab` - file system table
+    - `/dev/sdb1    /temp1    ext4    defaults    0   0` - the new line should look like this (it uses tabs, no spaces)
+- to validate after reboot: `lsblk`
+
 ## Nice Linux Tools
 
 ### xrandr
