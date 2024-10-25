@@ -647,9 +647,31 @@
     - `exa --long --header --git` - usage
 
 ### getent
-- `getent` - get entries from Name Service Switch libraries
+- `getent` - get entries from Name Service Switch (NSS) libraries
 - Example
     - `getent group sudo`
+    - `getent passwd ss`
+	- `getent group ss`
+	- `getent services `
+	- `getent services fido`
+	- `getent hosts`
+	- `getent networks`
+- Databases that can be queried by getent:
+    - `passwd` - user account information
+    - `group` - group account details
+    - `hosts` - hostnames and IP addresses
+    - `services` - network services and their associated ports
+    - `protocols` - network protocols
+    - `networks` - network names
+    - `shadow` - user password information (requires proper permissions)
+    - `aliases` - mail alias information
+    - `ahostsv4`
+    - `ahostsv6` (address resolution)
+    - `ahosts`
+    - `gshadow` (secure group information)
+    - `netgroup`
+    - `rpc` 
+    - `ethers` (Ethernet addresses)
 
 ### Logs
 - by defaul stored on:
@@ -928,7 +950,7 @@
 
     1. `sudo usermod -aG wheel jamecho`
     1. `sudo usermod -a -G sudo jamecho`
-    2. `sudo visudo`
+    2. `sudo visudo` - the way to edit the */etc/sudoers* file
 - or add
     - `%wheel ALL=(ALL) ALL`
 - edit `/etc/sudoers` (is a readonly file)
