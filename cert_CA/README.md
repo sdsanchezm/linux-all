@@ -1368,6 +1368,51 @@
         ```
     - `lvm --help`
 
+- then we can use `fstab` to auto mount
+    - `lsblk`
+    - `sudo fdisk -l`
+    - 
+        ```bash
+        Disk /dev/md0: 5 GiB, 5363466240 bytes, 10475520 sectors
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+        Disk /dev/mapper/volumegroup1-private1: 2 GiB, 2147483648 bytes, 4194304 sectors
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+        Disk /dev/mapper/volumegroup1-public1: 2.99 GiB, 3212836864 bytes, 6275072 sectors
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        ```
+    - `sudo mkfs.ext4 /dev/volumegroup1/public1` - format using ext4
+    - `sudo mkfs.ext4 /dev/volumegroup1/private1`
+    - `sudo mkdir /tempPublic1`
+    - `sudo mkdir /tempPrivate1`
+    - `sudo mount /dev/volumegroup1/private1 /tempPrivate1/` - mount 
+    - `sudo mount /dev/volumegroup1/public1 /tempPublic1/`
+    - `sudo touch /tempPrivate1/thisIsPrivate.txt` - create a file to test
+    - `sudo touch /tempPublic1/thisIsPublic.txt`
+    - `sudo umount /dev/volumegroup1/public1` - mount the volumes
+    - `sudo umount /dev/volumegroup1/private1`
+    - `ls /tempPublic1/` - validate
+    - `ls /tempPrivate1/`
+    - `sudo vim /etc/fstab` - edit fstab
+        ```bash
+        # / was on /dev/sda2 during curtin installation
+        /dev/disk/by-uuid/4c390b9c-f536-4e7c-befa-e2b8de7bd23c / ext4 defaults 0 1
+        /swap.img	none	swap	sw	0	0
+        /dev/volumegroup1/public1	/tempPublic1 ext4	defaults	0	0
+        ```
+    - `reboot`
+    - public1 is automatically mounted (private1 is not)
+
+
+sudo vim /etc/fstab
+/dev/volum
 
 ## Nice Linux Tools
 
