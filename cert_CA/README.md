@@ -1254,6 +1254,121 @@
 - `sudo mdadm --create --help` - get specific help
 
 
+### LVM 
+
+- install lvm
+    - `sudo apt install lvm2`
+    - `lsblk` lvm still considers md0 as a disk (unique block disk)
+        ```bash
+            sdc      8:32   0     5G  0 disk  
+            ├─sdc1   8:33   0     5G  0 part  
+            └─md0    9:0    0     5G  0 raid1 
+            sdd      8:48   0     5G  0 disk  
+            ├─sdd1   8:49   0     5G  0 part  
+            └─md0    9:0    0     5G  0 raid1 
+        ```
+- On md0 we're gonna create a (logical volume group)
+- first we create our physical device (required by lvm)
+    - `pvcreate /dev/md0` - created the physical volume
+    - `pvdisplay` - view/validate
+
+      ```bash
+        "/dev/md0" is a new physical volume of "<5.00 GiB"
+        --- NEW Physical volume ---
+        PV Name               /dev/md0
+        VG Name               
+        PV Size               <5.00 GiB
+        Allocatable           NO
+        PE Size               0   
+        Total PE              0
+        Free PE               0
+        Allocated PE          0
+        PV UUID               sss-ooo-lll-uuu-ccc
+        ```
+
+- then create the logical volume groups
+    - `vgcreate volumegroup1 /dev/md0` - create volume group (like a big disk we can resize)
+    - `vgdisplay` - validate
+        ```bash
+          --- Volume group ---
+            VG Name               volumegroup1
+            System ID             
+            Format                lvm2
+            Metadata Areas        1
+            Metadata Sequence No  1
+            VG Access             read/write
+            VG Status             resizable
+            MAX LV                0
+            Cur LV                0
+            Open LV               0
+            Max PV                0
+            Cur PV                1
+            Act PV                1
+            VG Size               4.99 GiB
+            PE Size               4.00 MiB
+            Total PE              1278
+            Alloc PE / Size       0 / 0   
+            Free  PE / Size       1278 / 4.99 GiB
+            VG UUID               sss-ooo-lll-uuu-ccc
+        ```
+
+- then create logical volumes
+    - `lvcreate --name private1 --size 2Gb volumegroup1`
+    - `lvcreate --name public1 --size 2.99Gb volumegroup1`
+    - `lvdisplay` - validate the lv (logical volume)
+        - 
+        ```bash
+                --- Logical volume ---
+                LV Path                /dev/volumegroup1/private1
+                LV Name                private1
+                VG Name                volumegroup1
+                LV UUID                sss-ooo-lll-uuu-ccc
+                LV Write Access        read/write
+                LV Creation host, time davsvm2, 2010-10-26 16:19:50 -0500
+                LV Status              available
+                # open                 0
+                LV Size                2.00 GiB
+                Current LE             512
+                Segments               1
+                Allocation             inherit
+                Read ahead sectors     auto
+                - currently set to     256
+                Block device           252:0
+                
+                --- Logical volume ---
+                LV Path                /dev/volumegroup1/public1
+                LV Name                public1
+                VG Name                volumegroup1
+                LV UUID                ccc-uuu-lll-ooo-sss
+                LV Write Access        read/write
+                LV Creation host, time davsvm2, 2010-10-21 12:21:21 -0500
+                LV Status              available
+                # open                 0
+                LV Size                2.99 GiB
+                Current LE             766
+                Segments               1
+                Allocation             inherit
+                Read ahead sectors     auto
+                - currently set to     256
+                Block device           252:1
+        ```
+    - `vgdisplay` - validate
+    - `lsblk` - validate partition tables
+        ```bash
+            sdc                         8:32   0     5G  0 disk  
+            ├─sdc1                      8:33   0     5G  0 part  
+            └─md0                       9:0    0     5G  0 raid1 
+            ├─volumegroup1-private1 252:0    0     2G  0 lvm   
+            └─volumegroup1-public1  252:1    0     3G  0 lvm   
+            sdd                         8:48   0     5G  0 disk  
+            ├─sdd1                      8:49   0     5G  0 part  
+            └─md0                       9:0    0     5G  0 raid1 
+            ├─volumegroup1-private1 252:0    0     2G  0 lvm   
+            └─volumegroup1-public1  252:1    0     3G  0 lvm   
+        ```
+    - `lvm --help`
+
+
 ## Nice Linux Tools
 
 ### xrandr
