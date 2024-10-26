@@ -1411,8 +1411,29 @@
     - public1 is automatically mounted (private1 is not)
 
 
-sudo vim /etc/fstab
-/dev/volum
+### grub
+
+- process must be from the recover disk and disk shouldn't be ciphered (encrypted)
+- to broke the grub, just rename the grub.cfg file to something else
+- file:
+    - `/boot/grub/grub.cfg`
+
+- binding process
+    - `mount -o bind /dev/ /mnt/dev`
+    - `mount -o bind /dev/pts /mnt/dev/pts`
+    - `mount -o bind /proc/ /mnt/proc`
+    - `mount -o bind /run/ /mnt/run`
+    - `mount -o bind /sys/ /mnt/sys`
+
+- change root root of the system
+    - `chroot /mnt/ /bin/bash`
+
+- repair grub
+    - `grub-mkconfig -o / boot/grub/grub.cfg`
+
+- reinstall grub
+    - `grub-install –boot-directory=/boot/ --recheck /dev/sda`
+
 
 ## Nice Linux Tools
 
