@@ -6,6 +6,11 @@ age_regex='^([1-9][1-9])$'
 address_regex='^([A-Z]{1})([a-z]*\s)([A-Z]{2}\s)([0-9]*)$'
 phone_regex='^([0-9]{10})$'
 
+- a. (one a and any other character)
+- a* (zero or more a)
+- a.* (a then any characters or none)
+- a+ (one or more a)
+- `/\[\d+?\],.*/` ()
 
 function invalid_syntax {
     echo "invalid input, Please try again..."

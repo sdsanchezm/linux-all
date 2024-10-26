@@ -74,6 +74,17 @@
     fi
     ```
 
+## bash debugging
+- `-v` verbose 
+    - allows inspecting the code line in the terminal
+    - `bash -v a.sh`
+- noexec 
+    - finds the syntax error in the bash script
+    - `bash -n a.sh`
+- `-x` (xtrace mode)
+    - shows all variables +x at the beggining
+    - `bash -x a.sh`
+
 ## vim basic
 - details at
     - [https://gist.github.com/ruph/1437650]

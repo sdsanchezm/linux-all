@@ -478,6 +478,7 @@
     - `sudo systemctl` -- all installed services status
 
 ### adduser
+- interactive way to create a user (ask for each detail)
 - Example
     - `adduser jara1`
     - `sudo adduser jara1` - create the new user
