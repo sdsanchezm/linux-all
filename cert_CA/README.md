@@ -4,7 +4,12 @@
 - [Generals](#generals)
 - [Backup](#backup)
 - [Filesystems and file management](#filesystems-and-file-management)
-- [User and System Administration commands](#user-and-system-administration-commands)      
+- [User and System Administration commands](#user-and-system-administration-commands)
+- [Monitoring](#monitoring)
+  - [top](#top)
+  - [htop](#htop)
+  - [glances](#glances)
+  - [bpvtop](#bpvtop)
   - [cat](#cat)
   - [cd](#cd)
   - [find](#find)
@@ -22,13 +27,14 @@
   - [free](#free)
   - [df](#df)
   - [ps](#ps)
+  - [pidof, lsof](#pidof,-lsof)
   - [vmstat](#vmstat)
   - [dig](#dig)
   - [ip](#ip)
   - [netstat](#netstat)
   - [ping](#ping)
   - [traceroute](#traceroute)
-  - [w](#w)
+  - [w, who and users](#w,-who-and-users)
   - [Systemctl](#systemctl)
   - [adduser](#adduser)
   - [groups](#groups)
@@ -49,6 +55,8 @@
   - [id](#id)
   - [blkid](#blkid)
   - [exa](#exa)
+  - [getent](#getent)
+  - [Logs](#logs)
 - [Networking and troubleshooting](#networking-and-troubleshooting)
   - [NetworkManager](#networkmanager)
     - [nmcli](#nmcli)
@@ -57,6 +65,10 @@
     - [ip](#ip)
     - [ipcalc](#ipcalc)
     - [host and dig](#host-and-dig)
+    - [kill and killall](#kill-and-killall)
+    - [fg bg and jobs](#fg-bg-and-jobs)
+- [Processes](#processes)
+- [Services and daemons](#services-and-daemons)
 - [Network Troubleshoot](#network-troubleshoot)
   - [Validate Adapter is up](#validate-adapter-is-up)
   - [Validate local configuration](#validate-local-configuration)
@@ -65,8 +77,19 @@
 - [software and cloud concepts](#software-and-cloud-concepts)
   - [Key Features](#key-features)
 - [Security fundamentals](#security-fundamentals)
+  - [sudoers](#sudoers)
+  - [ACL](#acl)
+  - [AIDE](#aide)
+  - [Single user mode](#single-user-mode)
+  - [File Permissions](#file-permissions)
 - [Devops fundamentals](#devops-fundamentals)
 - [supporting apps and devs](#supporting-apps-and-devs)
+- [Storage](#storage)
+  - [lsblk](#lsblk)
+  - [fdisk](#fdisk)
+  - [mkfs](#mkfs)
+  - [mount and umount](#mount-and-umount)
+  - [fstab](#fstab)
 - [Nice Linux Tools](#nice-linux-tools)
   - [xrandr](#xrandr)
   - [fzf](#fzf)
@@ -77,8 +100,12 @@
   - [nerd-fonts](#nerd-fonts)
   - [rsync](#rsync)
   - [xclip](#xclip)
-  - [Packages](#packages)
-  - [neovim](#neovim)
+  - [Packages and dnf](#packages-and-dnf)
+  - [Vscodium](#vscodium)
+  - [Neovim](#neovim)
+  - [Services](#services)
+  - [Environment Variables](#environment-variables)
+
 
 ## Generals
 
@@ -1208,6 +1235,24 @@
 - `sudo vim /etc/fstab` - file system table
     - `/dev/sdb1    /temp1    ext4    defaults    0   0` - the new line should look like this (it uses tabs, no spaces)
 - to validate after reboot: `lsblk`
+
+
+### Raids
+
+- create a raid 1
+    - `sudo fdisk /dev/sdc` and `sudo fdisk /dev/sdd` 
+        - `n` - new partition
+        - `p` - primary
+        - [enter] - start sector
+        - [enter] - size of partition, enter for default
+        - `w` - write
+    - `sudo apt install mdadm` - utility 
+    - `sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sd[cd]` - 
+    - `lsblk` - check partitions and raid
+    - `sudo mdadm --misc --detail /dev/md0` - check the raid
+- `sudo mdadm --help` - get general help
+- `sudo mdadm --create --help` - get specific help
+
 
 ## Nice Linux Tools
 
