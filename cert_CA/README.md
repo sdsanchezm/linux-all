@@ -162,6 +162,21 @@
     - `cat file.txt`
     - `cat -A file.txt - all non-printing characters`
     - `cat -n file.txt - - numbers`
+
+### less
+- `less a.txt`
+- `ls -l | grep a | less`
+
+### tail
+- `tail ./a.txt`
+- `tail -n 10 ./a.txt` - last 10 lines
+- `tail -f ./a.txt ./b.txt` - follow 1 or more files (changes in real time)
+- `tail +40 ./a.txt` - counts 40 from the start
+
+### head
+- `head ./a.txt`
+- `head -n 10 ./a.txt`
+
 ### cd
 - classic, real classic
 
@@ -413,12 +428,14 @@
 
 ### ps
 
-- `Ps`
-- `Ps -aux`
-- `Ps -aux | grep davs`
-- `Ps -aux | grep less`
+- `man ps` - just the man, but a bunch of commands
+- `ps`
+- `ps -aux`
+- `ps -aux | grep davs`
+- `ps -aux | grep less`
 - More at:
     - [https://www.tecmint.com/linux-process-management/]
+- `ps -ft tty1` - list terminals
 
 ### pidof, lsof
 - pidof
@@ -449,13 +466,21 @@
 
 
 
-### w, who and users
+### w who and users
 - Example:
     - show who is logged in and what they're doing
     - `w` - shows who is connected to the server
     - `who` - shows who is connected to the server
     - `users` - shows who is connected to the server
 
+### tty
+- check the actual vt
+    - `tty`
+
+### chvt
+- change virtual terminal (like pressing Ctrl+Alt+Fx)
+    - `sudo chvt 6`
+    - `sudo chvt 7` - normally used in ubuntu
 
 ### Systemctl
 
@@ -786,8 +811,8 @@
 
 #### kill and killall
 
-- kill <OPTION> <PID>
 - Sends a signal to the process with the specified ID by default: SIGTERM
+- `kill <OPTION> <PID>`
 
 - killall -9 <nameOfApp>
 - killall -9 less (will kill all named "less" apps in use)
