@@ -190,6 +190,7 @@
 - commands
     - install
         - `sudo apt install samba`
+    - service (check/restart if required)
         - `sudo service nmbd status`
         - `sudo service smbd status `
     - user
@@ -202,13 +203,15 @@
         - `sudo smbpasswd -a sambauser`
         - `testparm`
     - firewall
-        - `sudo firewall-cmd --permanent --add-service=samba\nsudo firewall-cmd --reload`
+        - `sudo firewall-cmd --permanent --add-service=samba\nsudo`
+        - `firewall-cmd --reload`
         - `sudo firewall-cmd --add-service=samba --zone=public --permanent`
         - `sudo firewall-cmd --add-service=samba`
         - `sudo firewall-cmd --reload`
         - `sudo firewall-config`
         - `sudo service firewalld status`
-        - `sudo service firewalld stop`
+        - `sudo service firewalld stop` - just in case of test
+        - `sudo service smbd restart`
     - folder config
         - `sudo chmod -R 777 /shared`
         - `sudo chmod -R g+w /shared`

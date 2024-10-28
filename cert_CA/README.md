@@ -145,6 +145,11 @@
 ## Monitoring
 
 ### top
+- `top`
+    - load average: cpu (measures at: 1min, 5min and 15 min)
+- `free` - check memory of the system
+- `free -h` - check the memoty of the system
+- `du`
 
 ### htop
 
@@ -838,12 +843,16 @@
 
 #### fg bg and jobs
 - Ampersand at the end (background execution)
-    - `fg %1`
+    - `fg %2` - rh based
+    - `fg 3` - debian based
     - `bg`
 - Jobs -l (view all background jobs)
     - Fg 1 (job 1 is brought it back to foreground)
     - Fg 2 (job 2 is brought it back to foreground)
     - `jobs` list all jobs
+- open `vim a.txt` then Ctrl+z then `jobs` it will be sent to background
+    - then `fg 1` to come back
+    - `jobs` if need a list
 
 
 ## Processes
