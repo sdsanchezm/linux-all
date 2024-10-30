@@ -470,6 +470,44 @@
 ### traceroute
 
 
+### ssh and ssh-copy-id
+- `ssh-keygen` - key is normally/ByDefault stored at `/home/<user>/.ssh/id_rsa`
+- the *.pub* file go to the remote server (this is the public key)
+- the other one stays locally (the private one)
+    - `ssh-copy-id -i keyPath/<keyName>.pub <user>@<serverIp>` - copy public key
+        ```
+        /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "id_ed25519.pub"
+        The authenticity of host '192.x.x.x (192.x.x.x)' can't be established.
+        ED25519 key fingerprint is SHA256:qweasd
+        This key is not known by any other names.
+        Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+        /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+        /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+        jamecho@192.x.x.x's password:
+
+        Number of key(s) added: 1
+
+        Now try logging into the machine, with:   "ssh 'jamecho@192.x.x.x'"
+        and check to make sure that only the key(s) you wanted were added.
+        ```
+- `ssh <user>@<serverIp>` - validate in `~/.ssh/authorized_keys`
+- `ssh -vvvv <user>@<serverIp>` - verbose, the more v, the more verbose
+- config file: `/etc/ssh/sshd_config` - content:
+    ```bash
+    PasswordAuthentication yes
+    PertmiEmptyPasswords no
+    ChallengeResponseAuthentication no
+    PermitRootLogin no
+    AllowUsers <user>
+    ```
+#### ssh-keygen and ssh-add
+- `ssh-keygen -t ed25519 -C "j@example.com"`
+- `eval "$(ssh-agent -s)"` - (here we ensure ssh service is up) and the result:
+    - id_ed25519      id_ed25519.pub
+- `ssh-add ~/.ssh/id_ed25519` - result:
+    - Enter passphrase for /home/jamecho/.ssh/id_ed25519:
+    - Identity added: /home/jamecho/.ssh/id_ed25519 (j@example.com)
+
 
 ### w who and users
 - Example:
