@@ -1,110 +1,119 @@
 # Tracking
 
-- [Tracking](#tracking)
-- [Generals](#generals)
-- [Backup](#backup)
-- [Filesystems and file management](#filesystems-and-file-management)
-- [User and System Administration commands](#user-and-system-administration-commands)
-- [Monitoring](#monitoring)
-  - [top](#top)
-  - [htop](#htop)
-  - [glances](#glances)
-  - [bpvtop](#bpvtop)
-  - [cat](#cat)
-  - [cd](#cd)
-  - [find](#find)
-  - [grep](#grep)
-  - [info](#info)
-  - [ls](#ls)
-  - [man](#man)
-  - [pwd](#pwd)
-  - [chgrp](#chgrp)
-  - [chmod](#chmod)
-  - [chown](#chown)
-  - [fdisk](#fdisk)
-  - [iostat](#iostat)
-  - [ss](#ss)
-  - [free](#free)
-  - [df](#df)
-  - [ps](#ps)
-  - [pidof, lsof](#pidof,-lsof)
-  - [vmstat](#vmstat)
-  - [dig](#dig)
-  - [ip](#ip)
-  - [netstat](#netstat)
-  - [ping](#ping)
-  - [traceroute](#traceroute)
-  - [w, who and users](#w,-who-and-users)
-  - [Systemctl](#systemctl)
-  - [adduser](#adduser)
-  - [groups](#groups)
-  - [users](#users)
-  - [userdel](#userdel)
-  - [usermod](#usermod)
-  - [deluser](#deluser)
-  - [User Files](#user-files)
-  - [view all users](#view-all-users)
-  - [view all groups](#view-all-groups)
-  - [add a user to a group](#add-a-user-to-a-group)
-  - [User password](#user-password)
-  - [User shell (chsh)](#user-shell-(chsh))
-  - [Log as user](#log-as-user)
-  - [change the user id](#change-the-user-id)
-  - [find all files from a specific user (using the user id)](#find-all-files-from-a-specific-user-(using-the-user-id))
-  - [change the owner of a file or dir](#change-the-owner-of-a-file-or-dir)
-  - [id](#id)
-  - [blkid](#blkid)
-  - [exa](#exa)
-  - [getent](#getent)
-  - [Logs](#logs)
-- [Networking and troubleshooting](#networking-and-troubleshooting)
-  - [NetworkManager](#networkmanager)
-    - [nmcli](#nmcli)
-    - [nmtui](#nmtui)
-    - [nm-connection-editor](#nm-connection-editor)
-    - [ip](#ip)
-    - [ipcalc](#ipcalc)
-    - [host and dig](#host-and-dig)
-    - [kill and killall](#kill-and-killall)
-    - [fg bg and jobs](#fg-bg-and-jobs)
-- [Processes](#processes)
-- [Services and daemons](#services-and-daemons)
-- [Network Troubleshoot](#network-troubleshoot)
-  - [Validate Adapter is up](#validate-adapter-is-up)
-  - [Validate local configuration](#validate-local-configuration)
-  - [Validate connections](#validate-connections)
-  - [Validate server functions](#validate-server-functions)
-- [software and cloud concepts](#software-and-cloud-concepts)
-  - [Key Features](#key-features)
-- [Security fundamentals](#security-fundamentals)
-  - [sudoers](#sudoers)
-  - [ACL](#acl)
-  - [AIDE](#aide)
-  - [Single user mode](#single-user-mode)
-  - [File Permissions](#file-permissions)
-- [Devops fundamentals](#devops-fundamentals)
-- [supporting apps and devs](#supporting-apps-and-devs)
-- [Storage](#storage)
-  - [lsblk](#lsblk)
-  - [fdisk](#fdisk)
-  - [mkfs](#mkfs)
-  - [mount and umount](#mount-and-umount)
-  - [fstab](#fstab)
-- [Nice Linux Tools](#nice-linux-tools)
-  - [xrandr](#xrandr)
-  - [fzf](#fzf)
-  - [bat](#bat)
-  - [tldr](#tldr)
-  - [eza](#eza)
-  - [git-delta](#git-delta)
-  - [nerd-fonts](#nerd-fonts)
-  - [rsync](#rsync)
-  - [xclip](#xclip)
-  - [Packages and dnf](#packages-and-dnf)
-  - [Vscodium](#vscodium)
-  - [Neovim](#neovim)
-  - [Services](#services)
-  - [Environment Variables](#environment-variables)
+  - [Tracking](#tracking)
+    - [Generals](#generals)
+    - [Backup](#backup)
+    - [Filesystems and file management](#filesystems-and-file-management)
+    - [User and System Administration commands](#user-and-system-administration-commands)
+    - [Monitoring](#monitoring)
+      - [top](#top)
+      - [htop](#htop)
+      - [glances](#glances)
+      - [bpvtop](#bpvtop)
+      - [cat](#cat)
+      - [less](#less)
+      - [tail](#tail)
+      - [head](#head)
+      - [cd](#cd)
+      - [find](#find)
+      - [grep](#grep)
+      - [info](#info)
+      - [ls](#ls)
+      - [man](#man)
+      - [pwd](#pwd)
+      - [chgrp](#chgrp)
+      - [chmod](#chmod)
+      - [chown](#chown)
+      - [fdisk](#fdisk)
+      - [iostat](#iostat)
+      - [ss](#ss)
+      - [free](#free)
+      - [df](#df)
+      - [ps](#ps)
+      - [pidof, lsof](#pidof,-lsof)
+      - [vmstat](#vmstat)
+      - [dig](#dig)
+      - [ip](#ip)
+      - [netstat](#netstat)
+      - [ping](#ping)
+      - [traceroute](#traceroute)
+      - [ssh and ssh-copy-id](#ssh-and-ssh-copy-id)
+        - [ssh-keygen and ssh-add](#ssh-keygen-and-ssh-add)
+      - [w who and users](#w-who-and-users)
+      - [tty](#tty)
+      - [chvt](#chvt)
+      - [Systemctl](#systemctl)
+      - [adduser](#adduser)
+      - [groups](#groups)
+      - [users](#users)
+      - [userdel](#userdel)
+      - [usermod](#usermod)
+      - [deluser](#deluser)
+      - [User Files](#user-files)
+      - [view all users](#view-all-users)
+      - [view all groups](#view-all-groups)
+      - [add a user to a group](#add-a-user-to-a-group)
+      - [User password](#user-password)
+      - [User shell (chsh)](#user-shell-(chsh))
+      - [Log as user](#log-as-user)
+      - [change the user id](#change-the-user-id)
+      - [change the owner of a file or dir](#change-the-owner-of-a-file-or-dir)
+      - [id](#id)
+      - [blkid](#blkid)
+      - [exa](#exa)
+      - [getent](#getent)
+      - [Logs](#logs)
+    - [Networking and troubleshooting](#networking-and-troubleshooting)
+      - [NetworkManager](#networkmanager)
+        - [nmcli](#nmcli)
+        - [nmtui](#nmtui)
+        - [nm-connection-editor](#nm-connection-editor)
+        - [ip](#ip)
+        - [ipcalc](#ipcalc)
+        - [host and dig](#host-and-dig)
+        - [kill and killall](#kill-and-killall)
+        - [fg bg and jobs](#fg-bg-and-jobs)
+    - [Processes](#processes)
+    - [Services and daemons](#services-and-daemons)
+    - [Network Troubleshoot](#network-troubleshoot)
+      - [Validate Adapter is up](#validate-adapter-is-up)
+      - [Validate local configuration](#validate-local-configuration)
+      - [Validate connections](#validate-connections)
+      - [Validate server functions](#validate-server-functions)
+    - [software and cloud concepts](#software-and-cloud-concepts)
+      - [Key Features](#key-features)
+    - [Security fundamentals](#security-fundamentals)
+      - [sudoers](#sudoers)
+      - [ACL](#acl)
+      - [AIDE](#aide)
+      - [Single user mode](#single-user-mode)
+      - [File Permissions](#file-permissions)
+    - [Devops fundamentals](#devops-fundamentals)
+    - [supporting apps and devs](#supporting-apps-and-devs)
+    - [Storage](#storage)
+      - [lsblk](#lsblk)
+      - [fdisk](#fdisk)
+      - [mkfs](#mkfs)
+      - [mount and umount](#mount-and-umount)
+      - [fstab](#fstab)
+      - [Raids](#raids)
+      - [LVM](#lvm)
+      - [grub](#grub)
+    - [Nice Linux Tools](#nice-linux-tools)
+      - [xrandr](#xrandr)
+      - [fzf](#fzf)
+      - [bat](#bat)
+      - [tldr](#tldr)
+      - [eza](#eza)
+      - [git-delta](#git-delta)
+      - [nerd-fonts](#nerd-fonts)
+      - [rsync](#rsync)
+      - [xclip](#xclip)
+      - [Packages and dnf](#packages-and-dnf)
+      - [Vscodium](#vscodium)
+      - [Neovim](#neovim)
+      - [Services](#services)
+      - [Environment Variables](#environment-variables)
 
 
 ## Generals
@@ -185,79 +194,108 @@
 ### cd
 - classic, real classic
 
-### find 
+### find
+- find all executables in a path and remove them
+    - `find /some/dir -type f -executable -exec rm {} \;`
+- find all files that have not been accessed in the last 30 days and move them into another dir
+    - `find /some/dir -type f -atime +30 -exec mv {} /some/destination/ \;`
+    - `find /some/dir -type f -atime +30 -exec mv -t /some/destination/ {} +`
+- options for `-type`
+    - `f` - regular file
+    - `d` - directory
+    - `l` - symbolic link
+    - `c` - character device
+    - `b` - block device
+    - `p` - named pipe (FIFO)
+    - `s` - socket
+- options for properties
+    - `-executable` - in the find command
+    - `-readable` - readable files
+    - `-writable` - writable files
+    - `-empty` - empty files or directories
+    - `-user [name]` - files owned by a specific user
+    - `-group [name]` - files owned by a specific group
+    - `-size [N]` - files of a specific size
+    - `-iname [pattern]` - case-insensitive name matching
+    - `-perm [mode]` - files with specific permissions
+        - `find /dir/path -type f -perm 755` - specifically 755
+        - `find /dir/path -type f -perm -200` - at least write for the user (UGO)
+
+- finding all files from a specific user
 - Example
-    - **`-print`**:
-    Outputs the full pathname of the matched files or directories. This is the default action if no other action is specified.
+    - `find /home -user 1001`
+- Example
+    - outputs the full pathname of the matched files or directories. This is the default action if no other action is specified
+        - `-print`
 
-    - **`-empty`**:
-    Finds empty files or directories.
+    - finds empty files or directories
+        - `-empty`
 
-    - **`-maxdepth level`**:
-    Limits the search to a specific depth. For example, `-maxdepth 1` searches only in the current directory.
+    - limits the search to a specific depth. For example, `-maxdepth 1` searches only in the current directory
+        - `-maxdepth level`:
 
-    - **`-xdev`**:
-    Restricts the search to the same file system as the starting point, avoiding directories on other filesystems.
+    - restricts the search to the same file system as the starting point, avoiding directories on other filesystems
+        - `-xdev`
 
     - examples: 
-        - **Using `-print`**:
+        - Using `-print`
         ```sh
-        find /path/to/search -name "*.txt" -print
+        find /path/to/search -name ".txt" -print
         ```
-        Prints paths of all `.txt` files.
+        Prints paths of all `.txt` files
 
-        - **Using `-empty`**:
+        - Using `-empty`
         ```sh
         find /path/to/search -empty
         ```
-        Finds all empty files and directories.
+        Finds all empty files and directories
 
-        - **Using `-maxdepth`**:
+        - Using `-maxdepth`
         ```sh
-        find /path/to/search -maxdepth 1 -name "*.txt"
+        find /path/to/search -maxdepth 1 -name ".txt"
         ```
-        Searches for `.txt` files only in the current directory.
+        Searches for `.txt` files only in the current directory
 
-        - **Using `-xdev`**:
+        - Using `-xdev`
         ```sh
         find /path/to/search -xdev -name "*.txt"
         ```
-        Searches for `.txt` files only within the same filesystem as `/path/to/search`.
+        Searches for `.txt` files only within the same filesystem as `/path/to/search`
 
 ### grep 
 - Examples
-    - **`-i`**:
+    - *`-i`*:
     Ignores case distinctions in patterns and input data.
 
-    - **`-v`**:
+    - *`-v`*:
     Inverts the match, showing lines that do not match the pattern.
 
-    - **`-l`**:
+    - *`-l`*:
     Prints the names of files with matching lines, without showing the actual lines.
 
-    - **`-q`**:
+    - *`-q`*:
     Runs quietly, suppressing normal output. Exits with 0 if a match is found, otherwise exits with 1.
 
     - Examples:
-        - **Using `-i`**:
+        - *Using `-i`*:
         ```sh
         grep -i "pattern" file.txt
         ```
         Searches for "pattern" case-insensitively.
 
-        - **Using `-v`**:
+        - *Using `-v`*:
         ```sh
         grep -v "pattern" file.txt
         ```
         Displays lines that do not contain "pattern".
 
-        - **Using `-l`**:
+        - *Using `-l`*:
         ```sh
         grep -l "pattern" *.txt
         ```
         Lists filenames of `.txt` files that contain "pattern".
 
-        - **Using `-q`**:
+        - *Using `-q`*:
         ```sh
         grep -q "pattern" file.txt
         ```
@@ -694,19 +732,13 @@
 - updating files: change from 1001 to 550
     - `find / -user 1001 -exec chown -h 550 {} \;`
 
-### find all files from a specific user (using the user id)
-- Example
-    - `find /home -user 1001`
-
 ### change the owner of a file or dir
 - Example
     - `chown -h user /home/tiche/folder`
     - Recursively (all dirs)
         - `chown -R tiche:tichegroup /home/tiche/folder`
 
-
 ### id 
-
 - display the actual user id and groups
     - Example:
         - `id`
