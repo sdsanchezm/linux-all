@@ -385,8 +385,11 @@
 ### chown
 
 - Example
-    - `-R`: Recursively changes ownership of directories and their contents
+    - `-R`: recursively changes ownership of directories and their contents
     - Example: `chown -R user:group directory`
+- Example2:
+    - `chwon user /path/file`
+    - `chwon user /path/folder`
 
     - The `chown` command is used to change the ownership of files and directories in Unix and Linux systems. The `-R` flag is recursively throug directory trees
 
@@ -600,6 +603,7 @@
     - `sudo chfn jara1` - update user info
     - `usermod --lock jara1` - lock a user ()
     - `usermod --unlock jara1` - unlock a user
+    - `usermod -U jara1` - unlock a user
     - `userdel jara1` - removes jara1
     - `userdel -r jara1` - removes jara1 also removing directory
 
@@ -614,9 +618,11 @@
     - `getent group sudo`
 - Examples
     - `groupmod -n <newname> <oldname>` - change the name of a group
+    - `groupmod -gid <newID> <groupname>` - change the id of a group
     - `groupadd <name>` - add a new group
     - `groupdel <groupName>` - remove a group
     - `gpasswd -d <nameOfUser> <nameOfGroup>` - remove a user from the group
+    - `gpasswd -a <nameOfUser> <nameOfGroup>` - adds a user to a group
     - `groupmems`
     - `usermod -a -G <groupname> <username>` - add a user to a group
         - `usermod -aG <groupname> <username>` - add a user to a group
@@ -715,10 +721,18 @@
 - Change password of a user (user: jara in this case): 
     - `sudo passwd jara`
 
-### User shell (chsh)
-- To validate `/etc/passwd` - last record
+### chpasswd
+- 
+
+### chsh
+- change the shell of a user
 - Example
-    - `sudo chsh jara` - then `/usr/bin/zsh`
+    - `chsh` - interactive
+    - `sudo chsh /usr/bin/zsh jara` - change jara shell
+    - `chsh --shell jara` - change the shell for the user
+    - `chsh --shell /shell/path jara` - change the shell for the user
+    - `chsh --list-shell` - list shells
+- To validate changes `/etc/passwd` - last record
 
 ### Log as user
 - Example
