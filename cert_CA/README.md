@@ -1653,13 +1653,31 @@
 
 
 ### rsync
-- `rsync -options <srouce> <destination>`
-- Example basic copy
-    - `rsync `
-- Examples
-    - `rsync -avh /home/thisistheuser /home/thisistheuser/otherdirectory` - 
-    - `rsync -avh /home/thisistheuser thisistheuser@remoteHost:/home/thisistheuser/otherdirectory` - using ssh
-    - `rsync -avh --delete /home/thisistheuser /home/thisistheuser/otherdirectory` - this will not preserve deleted files in local to remote
+- `rsync -options <origin> <destination>`
+- complete and tested examples (using watch in real time)
+    - `rsync temp.txt /home/marrana` 
+    - `rsync -a ./origin1 ./destination1` - copies the entire folder origin1
+    - `rsync -avh ./origin1 ./destination1` - same but verbose, human readable
+    - `rsync -a ./origin1/ ./destination1/` - this copies content, not directory itself (`/` at the end)
+    - `rsync -avzh ./origin1/ ./destination1/` - preserves permissions, verbose, compressed mode, human readable
+    - `rsync -a kali@191.161.1.131:/home/kali/Downloads/serie1/ ./files1/` - using a remote origin
+    - `rsync -a ./files2/ kali@191.161.1.131:/home/marrana/Downloads/serie2/` - using a remote destination 
+    - Example 1 `--delete` option, if a file was delete on origin: using this option, rsync will delete destiny
+    - Example 2 `--delete` option, if a file was delete on destiny: using this option, rsync will sync from origin to destiny (wont delete origin)
+        - `rsync -avh --delete ./origin1/ ./destiny1/`
+    - `rsync -avz --exclude '*.mp4' --exclude '*.mp3' ./origin1/ ./destiny/` - excluding extensions
+    - `rsync -avz ./origin1/ ./destiny/ --dry-run` - test/preview before run it
+    - `rsync -au ./origin1/ ./destiny/` - skip files that are newer in the destination
+- options
+    - `-a` - archive mode (preserves permissions and symbolic links)
+    - `-v` - verbose
+    - `-z` - compress
+    - `-h` - human readable verbosity
+    - `-u` - skip newer files in the destination (to avoid overwriting them)
+    - `--progress` - display progress
+    - `--delete` - delete extraneous files from destiny
+    - `--exclude` - exclude specific folders/dirs
+    - `--dry-run` - simulate (recommended before transfer)
 
 
 ### xclip
