@@ -721,8 +721,23 @@
 - Change password of a user (user: jara in this case): 
     - `sudo passwd jara`
 
-### chpasswd
-- 
+### chpasswd and passwd
+- `tldr chpasswd`
+- `chpasswd` is for multiple users
+    - `printf "username:new_pass" | sudo chpasswd`
+    - `printf "username:new_pass1\nusername:new_pass2" | sudo chpasswd`
+    - `printf "username:new_pass_encrypted2\nusername2:new_pass_encrypted2" | sudo chpasswd --encrypted`
+- `passwd` is for a single user
+- `sudo passwd -S <user>` - status of the user
+
+
+### gpasswd and chgpasswd
+- `gpasswd -a user group`
+- `gpasswd group`
+- `gpasswd -d user group`
+- `sudo gpasswd -A user1,user2 group`
+- `sudo gpasswd -M user1,user2 group`
+
 
 ### chsh
 - change the shell of a user
@@ -1638,10 +1653,14 @@
 
 
 ### rsync
+- `rsync -options <srouce> <destination>`
+- Example basic copy
+    - `rsync `
 - Examples
     - `rsync -avh /home/thisistheuser /home/thisistheuser/otherdirectory` - 
     - `rsync -avh /home/thisistheuser thisistheuser@remoteHost:/home/thisistheuser/otherdirectory` - using ssh
     - `rsync -avh --delete /home/thisistheuser /home/thisistheuser/otherdirectory` - this will not preserve deleted files in local to remote
+
 
 ### xclip
 - there are 2 "buffers":
