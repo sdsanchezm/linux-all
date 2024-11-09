@@ -1679,6 +1679,14 @@
     - `--exclude` - exclude specific folders/dirs
     - `--dry-run` - simulate (recommended before transfer)
 
+### watch
+- keeps a command to diplay updates in real time
+- Examples
+    - `watch ls -a` - basic
+    - `watch -n 1 ls /home/marrana` - set 1 second
+    - `watch -n 1 ls -l /home/marrana` - same with list
+    - `watch -n 1 -d ls -l /home/marrana` - highlight changes
+    - `watch -n 1 'ls -lt /home/marrana'` - most recent modified files
 
 ### xclip
 - there are 2 "buffers":
