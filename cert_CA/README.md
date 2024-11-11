@@ -494,21 +494,7 @@
 
 
 ### vmstat
-
-
-### dig
-
-
-### ip
-
-
-### netstat
-
-
-### ping
-
-
-### traceroute
+- virtual memor stats
 
 
 ### ssh and ssh-copy-id
@@ -653,7 +639,8 @@
     - `sudo getfacl /pathToFileOrDir`
     - `sudo gpasswd -d <userName> <groupName>`
 
-
+### newgrp
+- `newgrp <groupName>` - changes user primary group membership
 
 ### users
 - Example
@@ -840,9 +827,58 @@
 
 ## Networking and troubleshooting
 
+
+### dig
+- dns lookup utility
+
+
+### netstat
+- network stats
+
+
+### ping
+- icmp (internet control message protocol)
+
+
+### traceroute
+- trace every router from origin to destiny
+
+
+#### ip
+- Display and manager network data/info
+- Examples
+    - `ip route`
+        ```
+        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+            inet 127.0.0.1/8 scope host lo
+            valid_lft forever preferred_lft forever
+            inet6 ::1/128 scope host
+            valid_lft forever preferred_lft forever
+        2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+            link/ether 08:00:21:15:21:11 brd ff:ff:ff:ff:ff:ff
+            inet 192.168.101.13/24 brd 192.168.100.255 scope global dynamic noprefixroute enp0s3
+            valid_lft 85194sec preferred_lft 85194sec
+            inet6 aa80::a16:f250:fc8e:620/64 scope link noprefixroute
+            valid_lft forever preferred_lft forever
+        ```
+    - `ip address show`
+        ```
+        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+            inet 127.0.0.1/8 scope host lo
+            valid_lft forever preferred_lft forever
+            inet6 ::1/128 scope host
+            valid_lft forever preferred_lft forever
+        2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+            link/ether 08:00:27:21:11:11 brd ff:ff:ff:ff:ff:fa
+            inet 192.168.100.12/24 brd 192.168.100.255 scope global dynamic noprefixroute enp0s3
+            valid_lft 95994sec preferred_lft 85194sec
+            inet6 aa20::a26:f210:fc8e:620/24 scope link noprefixroute
+            valid_lft forever preferred_lft forever
+        ```
+
+
+
 ### NetworkManager
-
-
 - Componentes
     - Ip addresses
     - Netmasks
@@ -868,40 +904,6 @@
 
 #### nm-connection-editor
 
-
-#### ip
-
-- Display and manager network data/info
-- Examples
-    - `ip route`
-        ```
-        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-            inet 127.0.0.1/8 scope host lo
-            valid_lft forever preferred_lft forever
-            inet6 ::1/128 scope host
-            valid_lft forever preferred_lft forever
-        2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-            link/ether 08:00:21:15:21:11 brd ff:ff:ff:ff:ff:ff
-            inet 192.168.101.13/24 brd 192.168.100.255 scope global dynamic noprefixroute enp0s3
-            valid_lft 85194sec preferred_lft 85194sec
-            inet6 fe80::a16:f250:fc8e:620/64 scope link noprefixroute
-            valid_lft forever preferred_lft forever
-        ```
-    - `ip address show`
-        ```
-        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-            inet 127.0.0.1/8 scope host lo
-            valid_lft forever preferred_lft forever
-            inet6 ::1/128 scope host
-            valid_lft forever preferred_lft forever
-        2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-            link/ether 08:00:27:21:11:11 brd ff:ff:ff:ff:ff:fa
-            inet 192.168.100.12/24 brd 192.168.100.255 scope global dynamic noprefixroute enp0s3
-            valid_lft 95994sec preferred_lft 85194sec
-            inet6 fe20::a26:f210:fc8e:620/24 scope link noprefixroute
-            valid_lft forever preferred_lft forever
-        ```
-
 #### ipcalc
 - Example
     - `ipcalc 192.168.91.23/24`
@@ -918,7 +920,7 @@
 - Sends a signal to the process with the specified ID by default: SIGTERM
 - `kill <OPTION> <PID>`
 
-- killall -9 <nameOfApp>
+- `killall -9 <nameOfApp>`
 - killall -9 less (will kill all named "less" apps in use)
 
 - kill <pid>
@@ -952,6 +954,9 @@
 - open `vim a.txt` then Ctrl+z then `jobs` it will be sent to background
     - then `fg 1` to come back
     - `jobs` if need a list
+- terminate one of the jobs
+    - `kill %[job number]`
+    - `kill %1`
 
 
 ## Processes
