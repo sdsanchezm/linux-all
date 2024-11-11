@@ -424,39 +424,6 @@
         - -c: Continuously displays CPU utilization statistics. Example: iostat -c
         - -k: Displays statistics in kilobytes per second. Example: iostat -k
 
-### ss
-- Must be sudo to display processes
-- Example
-    - check ports opened
-        - `ss -t -a -n` 
-        - `ss -t -a -n -p` 
-            ```
-            State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port   Process                                      
-            LISTEN   0        4096          127.0.0.54:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=19))   
-            LISTEN   0        4096           127.0.0.1:631            0.0.0.0:*       users:(("cupsd",pid=931,fd=7))              
-            LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=17))   
-            LISTEN   0        4096             0.0.0.0:5355           0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=11))   
-            LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
-            LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13)) 
-            ```
-        - `sudo ss -t -a -n -p` - must be sudo in order to show programs/processes names
-            ```
-            State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port   Process                                      
-            LISTEN   0        4096          127.0.0.54:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=19))   
-            LISTEN   0        4096           127.0.0.1:631            0.0.0.0:*       users:(("cupsd",pid=931,fd=7))              
-            LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=17))   
-            LISTEN   0        4096             0.0.0.0:5355           0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=11))   
-            LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
-            LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13))
-            ```
-    - -t or --tcp: This option tells ss to display TCP sockets. If you want to see UDP sockets, you would use -u instead.
-
-    - -a or --all: This option shows all sockets, including listening and non-listening (established) sockets.
-
-    - -n or --numeric: This option avoids converting port numbers to service names. It displays the numerical addresses instead of trying to resolve hostnames.
-
-    - -p or --processes: This option shows the process using the socket. It will display the process ID (PID) and the process name.
-
 
 ### free
 - Example (check memory available)
@@ -827,24 +794,54 @@
 
 ## Networking and troubleshooting
 
+### curl
+- transfer data from/to a server
+    - `curl -I http://example.com`
+
+### ifconfig 
+- display/configure network interfaces
+    - `ifconfig eth0`
 
 ### dig
+- query DNS servers
 - dns lookup utility
+    - `dig example.com`
+
+### nslookup
+- DNS query tool (alternative)
+    - `nslookup example.com`
 
 
 ### netstat
 - network stats
+    - `netstat -tuln`
 
 
 ### ping
 - icmp (internet control message protocol)
+- `ping example.com`
 
 
 ### traceroute
 - trace every router from origin to destiny
+    - `traceroute example.com`
+
+### route
+- display/manipulate the IP routing table
+    - `route -n`
+
+### arp
+- display/manipulate the ARP cache
+    - `arp -a`
+
+### nmap
+- network scanning and host discovery
+    - `nmap 192.168.1.0/24`
 
 
 #### ip
+- `ip addr show`
+- `ip link set eth0 up`
 - Display and manager network data/info
 - Examples
     - `ip route`
@@ -876,7 +873,40 @@
             valid_lft forever preferred_lft forever
         ```
 
+### ss
+- display network sockets (netstat alternative)
+    - `ss -tuln`
+- Must be sudo to display processes
+- Example
+    - check ports opened
+        - `ss -t -a -n` 
+        - `ss -t -a -n -p` 
+            ```
+            State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port   Process                                      
+            LISTEN   0        4096          127.0.0.54:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=19))   
+            LISTEN   0        4096           127.0.0.1:631            0.0.0.0:*       users:(("cupsd",pid=931,fd=7))              
+            LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=17))   
+            LISTEN   0        4096             0.0.0.0:5355           0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=11))   
+            LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
+            LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13)) 
+            ```
+        - `sudo ss -t -a -n -p` - must be sudo in order to show programs/processes names
+            ```
+            State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port   Process                                      
+            LISTEN   0        4096          127.0.0.54:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=19))   
+            LISTEN   0        4096           127.0.0.1:631            0.0.0.0:*       users:(("cupsd",pid=931,fd=7))              
+            LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=17))   
+            LISTEN   0        4096             0.0.0.0:5355           0.0.0.0:*       users:(("systemd-resolve",pid=714,fd=11))   
+            LISTEN   0        4096               [::1]:631               [::]:*       users:(("cupsd",pid=931,fd=6))              
+            LISTEN   0        4096                [::]:5355              [::]:*       users:(("systemd-resolve",pid=714,fd=13))
+            ```
+    - -t or --tcp: This option tells ss to display TCP sockets. If you want to see UDP sockets, you would use -u instead.
 
+    - -a or --all: This option shows all sockets, including listening and non-listening (established) sockets.
+
+    - -n or --numeric: This option avoids converting port numbers to service names. It displays the numerical addresses instead of trying to resolve hostnames.
+
+    - -p or --processes: This option shows the process using the socket. It will display the process ID (PID) and the process name.
 
 ### NetworkManager
 - Componentes
@@ -891,7 +921,7 @@
     - `lo`
 
 #### nmcli
-
+- networkManager cli tool
 - Example
     - `nmcli`
     - `nmcli device show` - complete list of devices
@@ -914,6 +944,20 @@
     - `dig www.linuxfoundation.org`
 - Nameserver can be entered at `/etc/resolv.conf`
 
+
+### hostname
+- display/set the system hostname
+    - `hostname`
+
+
+## Processes
+
+- solumn "S" in htop
+    - running or runable (R)
+    - uninterruptible sleep (D)
+    - interruptible sleep (S)
+    - stopped (T)
+    - zombie (Z)
 
 #### kill and killall
 
@@ -958,15 +1002,6 @@
     - `kill %[job number]`
     - `kill %1`
 
-
-## Processes
-
-- solumn "S" in htop
-    - running or runable (R)
-    - uninterruptible sleep (D)
-    - interruptible sleep (S)
-    - stopped (T)
-    - zombie (Z)
 
 ## Services and daemons
 
