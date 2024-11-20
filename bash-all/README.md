@@ -85,6 +85,9 @@
     - shows all variables +x at the beggining
     - `bash -x a.sh`
 
+## one liners
+- `for folder in "$(pwd)"/*/; do cd $folder; git status; cd ..; done`
+
 ## vim basic
 - details at
     - [https://gist.github.com/ruph/1437650]
