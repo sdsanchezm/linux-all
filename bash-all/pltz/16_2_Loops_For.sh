@@ -8,3 +8,12 @@ do
 	done < "$file"
 done
 
+# loop based on arrays
+folders=("~/progs" "~/temp")
+create_folders(){
+	for folder in ${folders[@]}; do
+		mkdir $folder
+	done
+}
+
+# create_folders
