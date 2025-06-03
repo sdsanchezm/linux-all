@@ -148,7 +148,31 @@
     - allow `smb` `nmb` and `wsdd` services
     - restart the 3 services
 
-## kali (debian based) samba config
+## kali - samba config 1
+
+- `sudo cp /etc/samba/smb.conf`
+- `sudo nvim /etc/samba/smb.conf`
+- config:
+    ```bash
+    [shared]
+    path = /home/jamecho/shared
+    available = yes
+    valid users = jamecho
+    read only = no
+    browsable = yes
+    public = no
+    writable = yes
+    ```
+- `mkdir ~/jamecho/shared`
+- `chmod 2775 ~/shared`
+- `sudo smbpasswd -a jamecho`
+- `sudo systemctl restart smbd.service`
+- install firewall if required
+    - `sudo apt install ufw`
+- `sudo ufw allow samba`
+- browse into `\\(ip)\shared`
+
+## kali - samba config 2
 
 - example `/etc/samba/smb.conf`
     ```bash
