@@ -1702,8 +1702,9 @@
     - `rsync -avzh ./origin1/ ./destination1/` - preserves permissions, verbose, compressed mode, human readable
     - `rsync -a kali@191.161.1.131:/home/kali/Downloads/serie1/ ./files1/` - using a remote origin
     - `rsync -a ./files2/ kali@191.161.1.131:/home/marrana/Downloads/serie2/` - using a remote destination 
-    - Example 1 `--delete` option, if a file was delete on origin: using this option, rsync will delete destiny
-    - Example 2 `--delete` option, if a file was delete on destiny: using this option, rsync will sync from origin to destiny (wont delete origin)
+    - `--delete` option only makes the destination an exact mirror of the source. It never deletes files from the origin.
+    - Example 1.1 `--delete` option, if a file was delete on origin: using this option, rsync will delete destiny
+    - Example 1.2 `--delete` option, if a file was delete on destiny: using this option, rsync will sync from origin to destiny (wont delete origin)
         - `rsync -avh --delete ./origin1/ ./destiny1/`
     - `rsync -avz --exclude '*.mp4' --exclude '*.mp3' ./origin1/ ./destiny/` - excluding extensions
     - `rsync -avz ./origin1/ ./destiny/ --dry-run` - test/preview before run it
