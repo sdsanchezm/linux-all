@@ -544,6 +544,9 @@
 - Example
     - `adduser jara1`
     - `sudo adduser jara1` - create the new user
+    - `passwd jara1` - change the new user password
+    - `sudo usermod -aG sudo jara1` - add user to sudoers
+        - validate: `groups jara1`
     - `sudo id jara1` - check the id of the new user
     - `id -u` - once logged in, check the id
     - `id -un` - once logged in, check the username
