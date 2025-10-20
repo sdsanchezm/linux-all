@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
+    container_name: homarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    ports:
+      - "7575:7575"
+    volumes:
+      - ./config:/app/data
+    labels:
+      - "traefik.enable=false"
