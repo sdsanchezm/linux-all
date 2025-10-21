@@ -3,23 +3,27 @@
 ### n8n using docker (tested on rpi5 8gb)
 
 - Update `sudo apt update && sudo apt upgrade -y`
-- Install 
+- Install
+
 ```sh
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo usermod -aG docker $USER
+  - `curl -fsSL https://get.docker.com -o get-docker.sh`
+  - `sudo sh get-docker.sh`
+  - `sudo usermod -aG docker $USER`
 ```
 
 - check docker version `docker --version`
 - Optional, enable docker `systemctl status docker` and `sudo systemctl enable docker`
-- install oackages required:
+- install packages required:
+
 ```sh
 sudo apt install -y python3-pip
 pip3 install docker-compose
 ```
+
 - check: `docker-compose --version`
 
 ### install n8n using a yaml file
+
 - create folders: `mkdir ~/n8n && cd ~/n8n`
 - create the data folder: `mkdir n8n-data` (inside)
 - edit the yaml file: `nvim docker-compose.yml`
@@ -44,6 +48,7 @@ pip3 install docker-compose
    volumes:
      n8n-data:
    ```
+
 - Example2 n8n yaml file (must update ip or serverName, <localhost>):
 
 ```yaml
@@ -88,22 +93,25 @@ volumes:
     - port forwarding on your router
 
 - update n8n container to the latest version:
+
 ```sh
 docker-compose pull
 docker-compose up -d
 ```
 
 - back up `n8n-data` directory
+
 ```bash
 tar -czvf n8n-backup.tar.gz ~/n8n/n8n-data
 ```
 
-### potential issues:
+### potential issues
 
 - ports issues:
   change port in host in `n8n.dev.yml` file to for example `8080:5678`
 
 - check logs if required
+
 ```bash
 docker logs <containerId>
 ```
