@@ -86,6 +86,11 @@
 - Make kiwitata work on rpi 5:
 	- `sudo apt install joystick`
 
+## NES Emulators TODOs
+
+- mesen (mnesen.ca)
+- FCEUmm (todo)
+
 ## Documentation
 - [https://forums.raspberrypi.com/viewtopic.php?t=357129](https://forums.raspberrypi.com/viewtopic.php?t=357129)
 - [EXWu4SUsaY8]
