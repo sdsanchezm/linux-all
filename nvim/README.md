@@ -5,6 +5,8 @@
 - install
     - `sudo dnf install neovim`
 
+- path for config: `~/.config/nvim/init.vim` (**vim and nvim**)
+
 ## Lazyvim
 
 - [docs](https://github.com/neovim/neovim/blob/master/INSTALL.md)
