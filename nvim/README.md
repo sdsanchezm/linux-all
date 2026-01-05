@@ -40,3 +40,4 @@
   - `git clone https://github.com/LazyVim/starter ~/.config/nvim`
   - `rm -rf ~/.config/.git`
   - `nvim`
+  - [here 2](https://builtin.com/software-engineering-perspectives/neovim-configuration)
