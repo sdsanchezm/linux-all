@@ -344,4 +344,3 @@ Generated Bash escape
 Copy escape
 
 One final tip: Always reset the formatting after each colored prompt section with `RESET='\[\033[0m\]'`. This prevents one section's colors from leaking into the next.
-
