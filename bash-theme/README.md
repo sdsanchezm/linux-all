@@ -1,0 +1,2 @@
+# bash themes and details
+
